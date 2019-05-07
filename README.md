@@ -202,7 +202,7 @@ Ce plugin est utilisé pour définir l’article principal d’une rubrique, en 
 
 Ce plugin est utilisé pour identifier unitairement les articles d'aide du secteur-apropos. 
 
-## Autorisation
+## Autorité
 
 Ce plugin est utilisé pour identifier le secteur-carnet et lui associer les autorisations nécessaires. 
 
