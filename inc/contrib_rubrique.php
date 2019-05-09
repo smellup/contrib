@@ -127,6 +127,32 @@ function rubrique_dans_secteur_carnet($id_rubrique) {
 
 
 /**
+ * Vérifie que la rubrique concernée fait bien partie du secteur-carnet.
+ * Le secteur-carnet est déterminé par la configuration de l'espace wiki dans le plugin
+ * Autorité.
+ *
+ * @param int $id
+ * 		Id de la rubrique concernée.
+ *
+ * @return bool
+ *       True si la rubrique fait partie du secteur-carnet, false sinon.
+ */
+function rubrique_dans_secteur_galaxie($id_rubrique) {
+
+	$est_galaxie = false;
+
+	include_spip('inc/config');
+	$galaxie = lire_config('contrib/secteurs', array());
+
+	if ($galaxie and in_array(rubrique_lire_secteur($id_rubrique), $galaxie)) {
+		$est_galaxie = true;
+	}
+
+	return $est_galaxie;
+}
+
+
+/**
  * Vérifie que la rubrique concernée fait bien partie d'un secteur-plugin.
  * Il suffit de vérifier que le secteur a bien une catégorie non vide.
  *
