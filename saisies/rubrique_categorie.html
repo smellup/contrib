@@ -1,10 +1,11 @@
 [(#REM)
 
-	### /!\ Saisie des catégories d'un plugin ###
+	### /!\ Saisie du champ extra categorie pour une rubrique ###
 
 	Paramètres :
 	- nom : name du select
 	- class : classe(s) css ajoutes au select
+	- l'environnement de la rubrique
 ]
 
 [(#REM) Déterminer les data en fonction du contexte ]
@@ -18,7 +19,7 @@
 <B_categories>
 <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] >
 	[<option value=""[ (#ENV{categorie}|non)selected="selected"]>
-		(#ENV{option_intro})
+		(#ENV{option_intro}|et{#PROFONDEUR|=={0}}|oui)
 	</option>]
 <BOUCLE_categories(DATA) {source table, #GET{data}}>
 	[(#SET{value, [(#CLE|is_string|?{#CLE, #VALEUR})]})]

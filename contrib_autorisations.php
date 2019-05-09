@@ -40,9 +40,10 @@ function autoriser_rubrique_modifierextra_categorie($faire, $type, $id, $qui, $o
 			// - le carnet wiki
 			// - le secteur apropos
 			include_spip('inc/contrib_rubrique');
-			if (!rubrique_est_apropos($id_rubrique)
-			and !rubrique_est_carnet($id_rubrique)) {
-				// On vérifie la profondeur de la rubrique qui ne peut-être que 0 ou 1.
+			if (!rubrique_dans_secteur_apropos($id_rubrique)
+			and !rubrique_dans_secteur_carnet($id_rubrique)) {
+				// On vérifie la profondeur de la rubrique qui ne peut-être que 0 ou 1
+				// et si 1, on vérifie que la rubrique parent a une catégorie non vide.
 				$profondeur = rubrique_lire_profondeur($id_rubrique);
 				if (($profondeur !== null)
 				and ($profondeur < 2)) {

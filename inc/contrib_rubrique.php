@@ -74,7 +74,18 @@ function rubrique_lire_categorie($id_rubrique) {
 }
 
 
-function rubrique_est_apropos($id_rubrique) {
+/**
+ * Vérifie que la rubrique concernée fait bien partie du secteur-apropos.
+ * Le secteur-apropos est déterminé par la configuration du secteur exclus dans
+ * le plugin Exclure Secteur.
+ *
+ * @param int $id
+ * 		Id de la rubrique concernée.
+ *
+ * @return bool
+ *       True si la rubrique fait partie du secteur-apropos, false sinon.
+ */
+function rubrique_dans_secteur_apropos($id_rubrique) {
 
 	$est_apropos = false;
 
@@ -89,7 +100,18 @@ function rubrique_est_apropos($id_rubrique) {
 }
 
 
-function rubrique_est_carnet($id_rubrique) {
+/**
+ * Vérifie que la rubrique concernée fait bien partie du secteur-carnet.
+ * Le secteur-carnet est déterminé par la configuration de l'espace wiki dans le plugin
+ * Autorité.
+ *
+ * @param int $id
+ * 		Id de la rubrique concernée.
+ *
+ * @return bool
+ *       True si la rubrique fait partie du secteur-carnet, false sinon.
+ */
+function rubrique_dans_secteur_carnet($id_rubrique) {
 
 	$est_carnet = false;
 
@@ -101,4 +123,33 @@ function rubrique_est_carnet($id_rubrique) {
 	}
 
 	return $est_carnet;
+}
+
+
+/**
+ * Vérifie que la rubrique concernée fait bien partie d'un secteur-plugin.
+ * Il suffit de vérifier que le secteur a bien une catégorie non vide.
+ *
+ * @param int $id
+ * 		Id de la rubrique concernée.
+ *
+ * @return bool
+ *       True si la rubrique fait partie d'un secteur-plugin, false sinon.
+ */
+function rubrique_dans_secteur_plugin($id_rubrique) {
+
+	static $est_plugin = array();
+
+	if (!isset($est_plugin[$id_rubrique])) {
+		$est_plugin[$id_rubrique] = false;
+
+		$select = array('categorie');
+		$where = array('id_rubrique=' . intval($id_rubrique));
+		$categorie = sql_getfetsel($select, 'spip_rubriques', $where);
+		if ($categorie) {
+			$est_plugin[$id_rubrique] = true;
+		}
+	}
+	
+	return $est_plugin[$id_rubrique];
 }
