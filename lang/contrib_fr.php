@@ -7,6 +7,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// I
-	'categorie_vide' => 'Aucune catégorie',
+	// C
+	'categorie_vide' => '--',
+	'configuration_page_titre' => 'Configuration de SPIP-Contrib',
+	'configuration_form_titre' => 'Configuration',
+	'configuration_secteur_galaxie_label' => 'Secteurs disponibles',
+	'configuration_secteur_galaxie_explication' => 'Choisir parmi les secteurs disponibles (hors secteur-carnet, secteur-apropos et secteurs-plugin) le ou les secteurs qui composeront la partie Galaxie du site.',
+
 );
