@@ -31,7 +31,7 @@ function formulaires_configurer_contrib_charger() {
 	$from = 'spip_rubriques';
 	$where = array(
 		'profondeur=0',
-		'categorie!=' . sql_quote(''),
+		'categorie=' . sql_quote(''),
 		sql_in('id_rubrique', $exclusions, 'NOT')
 	);
 	$secteurs = sql_allfetsel('id_rubrique, titre', $from, $where);
