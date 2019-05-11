@@ -1,7 +1,5 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 
-	<h3 class="titrem"><:contrib:configurer_form_titre:></h3>
-
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
@@ -14,7 +12,7 @@
 		[(#SAISIE{selection_multiple, secteurs,
 			explication=<:contrib:configuration_secteur_galaxie_explication:>,
 			label=<:contrib:configuration_secteur_galaxie_label:>,
-			data=#ENV{_secteurs},
+			data=#ENV{_secteur_possibles},
 		})]
 
 		</div>

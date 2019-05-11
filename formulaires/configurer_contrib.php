@@ -8,14 +8,13 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Chargement des données : le formulaire propose la liste des langues possibles.
- * L'utilisateur doit cocher les langues qu'il souhaite utiliser parmi les langues possibles.
+ * Chargement des données : le formulaire propose la liste des secteurs disponibles (hors apropos, carnet et plugin).
+ * L'utilisateur doit choisir le ou les secteurs qui corresponderont à la partie Galaxie du site.
  *
  * @return array
  * 		Tableau des données à charger par le formulaire (affichage ou données de configuration).
- * 		- `_langues`			: (affichage) codes de langue et libellés des langues possibles.
- * 		- `langues_utilisees`	: (configuration) la liste des langues utilisées. Par défaut, le plugin
- * 								  propose la langue française.
+ * 		- `_secteur_possibles` : (affichage) liste des secteurs disponibles (hors apropos, carnet et plugin).
+ * 		- `secteurs`           : (configuration) liste des secteurs galaxie choisis.
  */
 function formulaires_configurer_contrib_charger() {
 
@@ -35,7 +34,11 @@ function formulaires_configurer_contrib_charger() {
 		sql_in('id_rubrique', $exclusions, 'NOT')
 	);
 	$secteurs = sql_allfetsel('id_rubrique, titre', $from, $where);
-	$valeurs['_secteurs'] = array_column($secteurs, 'titre', 'id_rubrique');
+	$valeurs['_secteur_possibles'] = array_column($secteurs, 'titre', 'id_rubrique');
+
+	// Récupération des secteurs déjà choisis.
+	include_spip('inc/config');
+	$valeurs['secteurs'] = lire_config('contrib/secteurs', array());
 
 	return $valeurs;
 }

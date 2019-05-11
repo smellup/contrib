@@ -52,3 +52,5 @@ function generer_titre_rubrique($id_rubrique, $contenu_objet) {
 
 	return $titre;
 }
+
+include_spip('inc/contrib_rubrique');

@@ -74,6 +74,28 @@ function rubrique_lire_categorie($id_rubrique) {
 }
 
 
+function rubrique_determiner_type($id_rubrique) {
+
+	static $types = array();
+
+	if (!isset($types[$id_rubrique])) {
+		if (rubrique_dans_secteur_plugin($id_rubrique)) {
+			$types[$id_rubrique] = 'plugin';
+		} elseif (rubrique_dans_secteur_apropos($id_rubrique)) {
+			$types[$id_rubrique] = 'apropos';
+		} elseif (rubrique_dans_secteur_carnet($id_rubrique)) {
+			$types[$id_rubrique] = 'carnet';
+		} elseif (rubrique_dans_secteur_galaxie($id_rubrique)) {
+			$types[$id_rubrique] = 'galaxie';
+		} else {
+			$types[$id_rubrique] = '';
+		}
+	}
+
+	return $types[$id_rubrique];
+}
+
+
 /**
  * Vérifie que la rubrique concernée fait bien partie du secteur-apropos.
  * Le secteur-apropos est déterminé par la configuration du secteur exclus dans
@@ -169,10 +191,7 @@ function rubrique_dans_secteur_plugin($id_rubrique) {
 	if (!isset($est_plugin[$id_rubrique])) {
 		$est_plugin[$id_rubrique] = false;
 
-		$select = array('categorie');
-		$where = array('id_rubrique=' . intval($id_rubrique));
-		$categorie = sql_getfetsel($select, 'spip_rubriques', $where);
-		if ($categorie) {
+		if (rubrique_lire_categorie(rubrique_lire_secteur($id_rubrique))) {
 			$est_plugin[$id_rubrique] = true;
 		}
 	}

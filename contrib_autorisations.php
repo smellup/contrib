@@ -12,7 +12,7 @@ function contrib_autoriser(){}
  * Il faut :
  * - être un webmestre,
  * - que la rubrique ait une profondeur égale à 0 ou 1,
- * - que le secteur ne soit ni celui du carnet, ni celui de l'aide (apropos).
+ * - que le secteur ne soit ni un secteur-carnet, ni un secteur-apropos, ni un secteur-galaxie.
  * - et que si la rubrique est de profondeur 1, le secteur a déjà sa catégorie remplie.
  *
  * @param $faire
@@ -39,6 +39,7 @@ function autoriser_rubrique_modifierextra_categorie($faire, $type, $id, $qui, $o
 			// On vérifie si la rubrique est dans un secteur à exclure (non plugin).
 			// - le carnet wiki
 			// - le secteur apropos
+			// - le secteur galaxie
 			include_spip('inc/contrib_rubrique');
 			if (!rubrique_dans_secteur_apropos($id_rubrique)
 			and !rubrique_dans_secteur_carnet($id_rubrique)
@@ -49,7 +50,7 @@ function autoriser_rubrique_modifierextra_categorie($faire, $type, $id, $qui, $o
 				if (($profondeur !== null)
 				and ($profondeur < 2)) {
 					if (($profondeur == 0)
-					or (($profondeur == 1) 
+					or (($profondeur == 1)
 						and ($id_parent = rubrique_lire_parent($id_rubrique))
 						and rubrique_lire_categorie($id_parent))) {
 						$autoriser = true;
@@ -68,7 +69,7 @@ function autoriser_rubrique_modifierextra_categorie($faire, $type, $id, $qui, $o
  * Il faut :
  * - être un webmestre,
  * - que la rubrique ait une profondeur égale à 2,
- * - que la catégorie de sa rubrique parente soit non vide.
+ * - que la catégorie de sa rubrique parente soit non vide (rubrique-categorie).
  * Cela implique que le préfixe ne peut être positionné que si les rubriques parentes
  * ont déjà une catégorie.
  *
@@ -98,8 +99,9 @@ function autoriser_rubrique_modifierextra_prefixe($faire, $type, $id, $qui, $opt
 			$profondeur = rubrique_lire_profondeur($id_rubrique);
 			if (($profondeur !== null)
 			and ($profondeur == 2)) {
-				// On vérifie que l'on est bien dans une rubrique-plugin ce qui implique que le secteur ou la rubrique
-				// parente possède une catégorie non vide.
+				// On vérifie que l'on est bien dans une rubrique-categorie ce qui implique la rubrique
+				// parente possède une catégorie non vide (la rubrique parent n'est jamais un secteur du fait
+				// de la profondeur).
 				if ($id_parent = rubrique_lire_parent($id_rubrique)
 				and rubrique_lire_categorie($id_parent)) {
 					$autoriser =true;
