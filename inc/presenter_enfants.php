@@ -42,7 +42,7 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 	$res = array();
 
 	$result = sql_select(
-		'id_rubrique, id_parent, titre, descriptif, lang, prefixe',
+		'id_rubrique, id_parent, titre, descriptif, lang, categorie, prefixe',
 		'spip_rubriques',
 		'id_parent='.intval($collection),
 		'',
@@ -52,6 +52,8 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 	while ($row = sql_fetch($result)) {
 		$id_rubrique = $row['id_rubrique'];
 		$id_parent = $row['id_parent'];
+		$categorie = $row['categorie'];
+		$prefixe = $row['prefixe'];
 		// pour etre sur de passer par tous les traitements
 		$titre = generer_info_entite($id_rubrique, 'rubrique', 'titre');
 		if ('' !== ($rang = recuperer_numero($row['titre']))) {
@@ -95,14 +97,25 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 
 			// déterminer l'icone de la rubrique.
 			include_spip('inc/contrib_rubrique');
-			$prefixe = $row['prefixe'];
 			$type = rubrique_determiner_type($id_rubrique);
 			$icone = $prefixe
 				? 'plugin-24.png'
 				: ($id_parent ? 'rubrique' : 'secteur') . ($type ? '_' . $type : '') . '-24.png';
 
+			// déterminer le complément au titre, cad , la catégorie ou le préfixe.
+			$complement = '';
+			if ($categorie or $prefixe) {
+				include_spip('inc/contrib_rubrique');
+				$classe = 'couleur_' . rubrique_lire_categorie(rubrique_lire_secteur($id_rubrique));
+				$complement = _T('svp:label_' . ($categorie ? 'categorie' : 'prefixe'))
+					. "&nbsp;:&nbsp;<span class='plugin ${classe}'>"
+					. ($categorie ? $categorie : $prefixe)
+					. "</span></p>";
+			}
+
 			$res[] =
 				debut_cadre_sous_rub($icone, true, '', $titre) .
+				(!$complement ? '' : "\n<div class='descriptif'>$complement</div>") .
 				(!$descriptif ? '' : "\n<div class='descriptif'>$descriptif</div>") .
 				$les_sous_enfants .
 				fin_cadre_sous_rub();
@@ -143,7 +156,7 @@ function sous_enfant_rub($collection2) {
 	}
 
 	$result = sql_select(
-		'id_rubrique, id_parent, titre, lang',
+		'id_rubrique, id_parent, titre, lang, categorie, prefixe',
 		'spip_rubriques',
 		'id_parent='.intval($collection2),
 		'',
@@ -158,6 +171,8 @@ function sous_enfant_rub($collection2) {
 			'rubrique',
 			'titre'
 		); // pour etre sur de passer par tous les traitements
+		$titre2 .= $row['categorie'] ? " ({$row['categorie']})" : '';
+		$titre2 .= $row['prefixe'] ? " ({$row['prefixe']})" : '';
 		if ('' !== ($rang2 = recuperer_numero($row['titre']))) {
 			$rang2 = "$rang2. ";
 		}

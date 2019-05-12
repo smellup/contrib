@@ -39,18 +39,4 @@ if (!defined('_PLUGINSPIP_TIMEOUT_AUTODOC'))
 // Forcer l'utilisation de la langue du visiteur
 $GLOBALS['forcer_lang'] = true;
 
-
-function generer_titre_rubrique($id_rubrique, $contenu_objet) {
-
-	include_spip('inc/utils');
-	$titre = $contenu_objet['titre'];
-	if (test_espace_prive()) {
-		// On affiche le titre suivi de sa catégorie ou de son préfixe (exclusif)
-		$titre .= $contenu_objet['categorie'] ? " ({$contenu_objet['categorie']})" : '';
-		$titre .= $contenu_objet['prefixe'] ? " ({$contenu_objet['prefixe']})" : '';
-	}
-
-	return $titre;
-}
-
 include_spip('inc/contrib_rubrique');
