@@ -95,6 +95,27 @@ function rubrique_determiner_type($id_rubrique) {
 	return $types[$id_rubrique];
 }
 
+function rubrique_determiner_couleur($categorie) {
+
+	static $couleurs = array(
+		'auteur' => '1310b2',
+		'communication' => 'acbd70',
+		'date' => '471bb2',
+		'interactivite' => '50699b',
+		'contenu' => 'b22ba4',
+		'administration' => '09b2a3',
+		'multimedia' => 'de175f',
+		'navigation' => 'b26714',
+		'developpement' => 'dfb811',
+		'multilinguisme' => '11b23c',
+		'activite' => 'bd87c0',
+		'interface-publique' => '40dd5d',
+	);
+
+	$couleur = (!$categorie	or empty($couleurs[$categorie])) ? 'b9274d' : $couleurs[$categorie];
+
+	return $couleur;
+}
 
 /**
  * Vérifie que la rubrique concernée fait bien partie du secteur-apropos.

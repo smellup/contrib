@@ -22,8 +22,14 @@
 
 /* Boite d'infos d'une rubrique */
 #navigation .infos .numero  p.plugin { font-size: 1.4em; text-transform: lowercase; }
-#navigation .infos .numero.admin { border-top: 0;}
-#navigation .infos .liste-items.auteurs { border-bottom: 0;}
+#navigation .infos .numero.admin { border-bottom: 0;}
+#navigation .infos .liste-items.auteurs { border-top: 0;}
 #navigation .infos .liste-items.auteurs .item.auteur { border-top: 0;}
+
+/* Couleurs des catégories de niveau 1 */
+<BOUCLE_couleurs(DATA){source table, #VAL{1}|svp_lister_categorie}>
+.couleur_[(#VALEUR)] { color: [#(#VALEUR|rubrique_determiner_couleur)]; }
+</BOUCLE_couleurs>
+
 
 [(#REM)	</style>]
