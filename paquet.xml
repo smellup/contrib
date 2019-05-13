@@ -21,4 +21,5 @@
 
 	<pipeline nom="declarer_champs_extras" inclure="base/contrib_declarations.php" />
 	<pipeline nom="autoriser" inclure="contrib_autorisations.php" />
+	<pipeline nom="formulaire_charger" inclure="contrib_pipelines.php" />
 </paquet>
