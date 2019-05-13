@@ -75,6 +75,7 @@ function contrib_declarer_champs_extras($champs = array())  {
 			'options' => array(
 				'nom' => 'type_article',
 				'label' => '<:contrib:label_type_article:>',
+				'env' => true,
 				'restrictions' => array(
 					'modifier' => array(
 						'auteur' => 'webmestre',
