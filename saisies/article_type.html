@@ -1,0 +1,18 @@
+<div class="choix">
+	<input type="radio" name="type_article" class="radio" id="type_article_utilisation" value=""[ (#ENV{type_article}|non)checked="checked"]>
+	<label for="type_article_utilisation">
+		<:contrib:type_article_utilisation:>
+	</label>
+</div>
+<div class="choix">
+	<input type="radio" name="type_article" class="radio" id="type_article_conception" value="conception"[ (#ENV{type_article}|=={conception}|oui)checked="checked"]>
+	<label for="type_article_conception">
+		<:contrib:type_article_conception:>
+	</label>
+</div>
+<div class="choix">
+	<input type="radio" name="type_article" class="radio" id="type_article_actualite" value="actualite"[ (#ENV{type_article}|=={actualite}|oui)checked="checked"]>
+	<label for="type_article_actualite">
+		<:contrib:type_article_actualite:>
+	</label>
+</div>

@@ -7,7 +7,7 @@ function contrib_formulaire_charger($flux) {
 
 	if ($flux['args']['form'] == 'editer_article_accueil') {
 		// Récupérer les classes attribuées
-		$flux['data']['_saisies'] = array('publie');
+		$flux['data']['_statuts'] = array('prepa', 'prop', 'publie');
 		$flux['data']['_where'] = "type_article=''";
 	}
 

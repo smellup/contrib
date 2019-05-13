@@ -71,7 +71,7 @@ function contrib_declarer_champs_extras($champs = array())  {
 
 	// Ajout de la catégorie de plugin. La saisie est une sélection particulière.
 	$champs['spip_articles']['type_article'] = array(
-			'saisie' => 'input',
+			'saisie' => 'article_type',
 			'options' => array(
 				'nom' => 'type_article',
 				'label' => '<:contrib:label_type_article:>',
