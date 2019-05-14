@@ -17,5 +17,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_article_label' => 'Type d\'article',
 	'type_article_utilisation_label' => 'documentation générale',
 	'type_article_conception_label' => 'documentation de conception',
-	'type_article_actualite_label' => 'article d\actualité',
+	'type_article_actualite_label' => 'article d\'actualité',
 );
