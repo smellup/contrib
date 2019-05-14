@@ -7,6 +7,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'article_accueil_titre' => 'Article principal :',
+
 	// C
 	'categorie_vide_label' => 'Pas de catégorie',
 	'configuration_page_titre' => 'Configuration du plugin Contrib',
