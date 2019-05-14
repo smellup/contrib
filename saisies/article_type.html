@@ -1,18 +1,24 @@
-<div class="choix">
-	<input type="radio" name="type_article" class="radio" id="type_article_utilisation" value=""[ (#ENV{type_article}|non)checked="checked"]>
-	<label for="type_article_utilisation">
-		<:contrib:type_article_utilisation_label:>
+[(#REM)
+
+	### /!\ Saisie du champ extra type_article pour un article ###
+
+	Paramètres :
+	- nom : name du select
+	- data : tableau des couples (cle, valeur)
+	- exclusions : liste, pour chaque type d'article, des types de secteurs ne supportant pas le type
+	- class : classe(s) css ajoutees à chaque choix
+	- l'environnement de la rubrique
+]
+
+[(#REM) Déterminer le type de rubrique et en déduire les exclusions ]
+#SET{type_rubrique, #ENV{id_rubrique}|rubrique_determiner_type}
+#SET{exclusion_rubrique, #ENV{exclusions/type_rubrique}}
+
+<BOUCLE_types_article(DATA) {source table, #ENV{data}}{!cle IN #GET{exclusion_rubrique}}>
+<div class="choix[ (#ENV{class})]">
+	<input type="radio" name="#ENV{nom}" class="radio" id="champ_#ENV{nom}[_(#CLE)]_#COMPTEUR_BOUCLE" value="#CLE"[ (#ENV{valeur}|=={#CLE}|oui)checked="checked"]>
+	<label for="champ_#ENV{nom}[_(#CLE)]_#COMPTEUR_BOUCLE">
+		#VALEUR
 	</label>
 </div>
-<div class="choix">
-	<input type="radio" name="type_article" class="radio" id="type_article_conception" value="conception"[ (#ENV{type_article}|=={conception}|oui)checked="checked"]>
-	<label for="type_article_conception">
-		<:contrib:type_article_conception_label:>
-	</label>
-</div>
-<div class="choix">
-	<input type="radio" name="type_article" class="radio" id="type_article_actualite" value="actualite"[ (#ENV{type_article}|=={actualite}|oui)checked="checked"]>
-	<label for="type_article_actualite">
-		<:contrib:type_article_actualite_label:>
-	</label>
-</div>
+</BOUCLE_types_article>

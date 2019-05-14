@@ -4,7 +4,10 @@
 
 	Paramètres :
 	- nom : name du select
-	- class : classe(s) css ajoutes au select
+	- class : classe(s) css ajoutées au select
+	- disable : rendre le select inactif
+	- readonly : select en lecture seule
+	- option_intro : option pour "pas de catégorie"
 	- l'environnement de la rubrique
 ]
 
@@ -18,12 +21,12 @@
 
 <B_categories>
 <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] >
-	[<option value=""[ (#ENV{categorie}|non)selected="selected"]>
+	[<option value=""[ (#ENV{valeur}|non)selected="selected"]>
 		(#ENV{option_intro}|et{#PROFONDEUR|=={0}}|oui)
 	</option>]
 <BOUCLE_categories(DATA) {source table, #GET{data}}>
 	[(#SET{value, [(#CLE|is_string|?{#CLE, #VALEUR})]})]
-	<option value="#GET{value}"[ (#ENV{categorie}|=={#GET{value}}|oui)selected="selected"]>
+	<option value="#GET{value}"[ (#ENV{valeur}|=={#GET{value}}|oui)selected="selected"]>
 		#VALEUR
 	</option>
 </BOUCLE_categories>

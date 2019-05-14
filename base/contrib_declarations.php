@@ -75,6 +75,16 @@ function contrib_declarer_champs_extras($champs = array())  {
 			'options' => array(
 				'nom' => 'type_article',
 				'label' => '<:contrib:type_article_label:>',
+				'data' => array(
+					''           => '<:contrib:type_article_utilisation_label:>',
+					'conception' => '<:contrib:type_article_conception_label:>',
+					'actualite'  => '<:contrib:type_article_actualite_label:>'
+				),
+				'exclusions' => array(
+					''           => array(),
+					'conception' => array('apropos'),
+					'actualite'  => array('apropos', 'carnet')
+				),
 				'env' => true,
 				'restrictions' => array(
 					'modifier' => array(
