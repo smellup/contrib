@@ -219,3 +219,18 @@ function rubrique_dans_secteur_plugin($id_rubrique) {
 	
 	return $est_plugin[$id_rubrique];
 }
+
+/**
+ * Récupère les id de tous les secteurs-plugin.
+ *
+ * @return array
+ *        Liste des id des secteurs-pllugin ou tableau vide.
+ */
+function rubrique_lister_secteur_plugin() {
+
+	$from = 'spip_rubriques';
+	$where = array('profondeur=0', 'categorie!=' . sql_quote(''));
+	$secteurs = sql_allfetsel('id_rubrique', $from, $where);
+
+	return $secteurs;
+}

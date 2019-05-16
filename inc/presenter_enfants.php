@@ -114,7 +114,7 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 			}
 
 			$res[] =
-				debut_cadre_sous_rub($icone, true, '', $titre) .
+				debut_cadre_sous_rub($icone, true, '', "${titre} (${id_rubrique})") .
 				(!$complement ? '' : "\n<div class='descriptif'>$complement</div>") .
 				(!$descriptif ? '' : "\n<div class='descriptif'>$descriptif</div>") .
 				$les_sous_enfants .

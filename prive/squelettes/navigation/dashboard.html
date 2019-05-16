@@ -2,3 +2,11 @@
 #BOITE_OUVRIR{#CHEMIN_IMAGE{boussole_gerer-24.png}|balise_img{'',cadre-icone}, info}
 #BOITE_FERMER
 
+[(#AUTORISER{webmestre}|oui)
+	#BOITE_OUVRIR{'', raccourcis}
+	[(#URL_ACTION_AUTEUR{rubrique_prefixe_generer, '', #SELF}
+		|icone_horizontale{<:contrib:rubrique_prefixe_generer_label:>, rubrique_plugin-24.png})]
+	[(#URL_ACTION_AUTEUR{plugin_categorie_changer, '', #SELF}
+		|icone_horizontale{<:contrib:plugin_categorie_changer_label:>, plugin_categorie-24.png})]
+	#BOITE_FERMER
+]

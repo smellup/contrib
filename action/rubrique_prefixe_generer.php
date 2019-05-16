@@ -1,0 +1,58 @@
+<?php
+/**
+ * Ce fichier contient l'action `rubrique_prefixe_generer` utilisée lors de la migration
+ * pour actualiser le préfixe des rubrique-plugin à partir de l'url sur Plugins SPIP si elle existe.
+ *
+ */
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+/**
+ * Cette action permet d'actualiser le préfixe des rubrique-plugin à partir de l'url
+ * sur Plugins SPIP si elle existe.
+ *
+ * Cette action est réservée aux webmestres. Elle ne nécessite aucun argument.
+ *
+ * @return void
+ */
+function action_rubrique_prefixe_generer_dist(){
+
+	// Securisation: aucun argument attendu.
+
+	// Verification des autorisations
+	if (!autoriser('webmestre')) {
+		include_spip('inc/minipres');
+		echo minipres();
+		exit();
+	}
+
+	// Actualisation des rubriques-plugin :
+	// Un rubrique-plugin a une profondeur de 2 et est incluse dans un secteur-plugin.
+	// -- on récupère les secteurs-plugin
+	include_spip('inc:contrib_rubrique');
+	$secteurs_plugin = rubrique_lister_secteur_plugin();
+
+	// -- on récupère les rubriques-plugin
+	$from = 'spip_rubriques';
+	$where = array('profondeur=2', sql_in('id_secteur', $secteurs_plugin));
+	$rubriques_plugin = sql_allfetsel('id_rubrique', $from, $where);
+
+	if ($rubriques_plugin) {
+		// Pour chaque rubrique-plugin on identifie si il existe un article possédant une url_site
+		// pointant vers plugins spip car le basename est égal au préfixe (http[s]://plugins.spip.net/prefixe[.html]).
+		foreach ($rubriques_plugin as $_rubrique) {
+			$from = 'spip_articles';
+			$where = array('id_rubrique=' . intval($_rubrique['id_rubrique']));
+			if ($urls = sql_allfetsel('url_site', $from, $where)) {
+				foreach ($urls as $_url) {
+					if ($_url['url_site']
+					and ((stripos($_url['url_site'], 'https://plugins.spip.net/') === 0)
+						or (stripos($_url['url_site'], 'http://plugins.spip.net/')))) {
+						$maj['prefixe'] = basename($_url['url_site'], '.html');
+						sql_updateq('spip_rubriques', $maj, $where);
+					}
+				}
+			}
+		}
+	}
+}
