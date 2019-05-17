@@ -32,24 +32,26 @@ function action_rubrique_prefixe_generer_dist(){
 	include_spip('inc:contrib_rubrique');
 	$secteurs_plugin = rubrique_lister_secteur_plugin();
 
-	// -- on récupère les rubriques-plugin
-	$from = 'spip_rubriques';
-	$where = array('profondeur=2', sql_in('id_secteur', $secteurs_plugin));
-	$rubriques_plugin = sql_allfetsel('id_rubrique', $from, $where);
-
-	if ($rubriques_plugin) {
-		// Pour chaque rubrique-plugin on identifie si il existe un article possédant une url_site
-		// pointant vers plugins spip car le basename est égal au préfixe (http[s]://plugins.spip.net/prefixe[.html]).
-		foreach ($rubriques_plugin as $_rubrique) {
-			$from = 'spip_articles';
-			$where = array('id_rubrique=' . intval($_rubrique['id_rubrique']));
-			if ($urls = sql_allfetsel('url_site', $from, $where)) {
-				foreach ($urls as $_url) {
-					if ($_url['url_site']
-					and ((stripos($_url['url_site'], 'https://plugins.spip.net/') === 0)
-						or (stripos($_url['url_site'], 'http://plugins.spip.net/')))) {
-						$maj['prefixe'] = basename($_url['url_site'], '.html');
-						sql_updateq('spip_rubriques', $maj, $where);
+	// Pour limiter le nombre de rubriques récupérées, on boucle par secteur.
+	foreach ($secteurs_plugin as $_id_secteur) {
+		// -- on récupère les rubriques-plugin
+		$from = 'spip_rubriques';
+		$where = array('id_secteur=' . intval($_id_secteur));
+		$rubriques_plugin = sql_allfetsel('id_rubrique', $from, $where);
+		if ($rubriques_plugin) {
+			// Pour chaque rubrique-plugin on identifie si il existe un article possédant une url_site
+			// pointant vers plugins spip car le basename est égal au préfixe (http[s]://plugins.spip.net/prefixe[.html]).
+			foreach ($rubriques_plugin as $_rubrique) {
+				$from = 'spip_articles';
+				$where = array('id_rubrique=' . intval($_rubrique['id_rubrique']));
+				if ($urls = sql_allfetsel('url_site, id_article', $from, $where)) {
+					foreach ($urls as $_url) {
+						if ($_url['url_site']
+						and ((stripos($_url['url_site'], 'https://plugins.spip.net/') === 0)
+							or (stripos($_url['url_site'], 'http://plugins.spip.net/') === 0))) {
+							$maj['prefixe'] = basename($_url['url_site'], '.html');
+							sql_updateq('spip_rubriques', $maj, $where);
+						}
 					}
 				}
 			}

@@ -89,7 +89,7 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 				" href='" .
 				generer_url_entite($id_rubrique, 'rubrique') .
 				"'>" .
-				$rang . $titre .
+				$rang . $titre . " (${id_rubrique})" .
 				'</a>';
 
 			$titre = (is_string($logo) ? $logo : '') .
@@ -114,7 +114,7 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 			}
 
 			$res[] =
-				debut_cadre_sous_rub($icone, true, '', "${titre} (${id_rubrique})") .
+				debut_cadre_sous_rub($icone, true, '', $titre) .
 				(!$complement ? '' : "\n<div class='descriptif'>$complement</div>") .
 				(!$descriptif ? '' : "\n<div class='descriptif'>$descriptif</div>") .
 				$les_sous_enfants .
@@ -173,6 +173,7 @@ function sous_enfant_rub($collection2) {
 		); // pour etre sur de passer par tous les traitements
 		$titre2 .= $row['categorie'] ? " ({$row['categorie']})" : '';
 		$titre2 .= $row['prefixe'] ? " ({$row['prefixe']})" : '';
+		$titre2 .= " - ${id_rubrique2}";
 		if ('' !== ($rang2 = recuperer_numero($row['titre']))) {
 			$rang2 = "$rang2. ";
 		}

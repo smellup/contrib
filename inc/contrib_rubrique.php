@@ -230,7 +230,10 @@ function rubrique_lister_secteur_plugin() {
 
 	$from = 'spip_rubriques';
 	$where = array('profondeur=0', 'categorie!=' . sql_quote(''));
-	$secteurs = sql_allfetsel('id_rubrique', $from, $where);
+	if ($secteurs = sql_allfetsel('id_rubrique', $from, $where)) {
+		$secteurs = array_map('reset', $secteurs);
+	}
+	
 
 	return $secteurs;
 }
