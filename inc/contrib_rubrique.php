@@ -59,7 +59,7 @@ function rubrique_lire_categorie($id_rubrique) {
 
 	static $categories = array();
 
-	if (!isset($ids_secteur[$id_rubrique])) {
+	if (!isset($categories[$id_rubrique])) {
 		$categories[$id_rubrique] = '';
 
 		$from = 'spip_rubriques';
