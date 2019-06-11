@@ -18,8 +18,11 @@
 	<necessite nom="article_accueil" compatibilite="[1.1.6;]" />
 	<necessite nom="cextras" compatibilite="[3.11.8;]" />
 	<necessite nom="autorite" compatibilite="[0.10.23;]" />
+	<necessite nom="svptype" compatibilite="[0.1.0;]" />
 
 	<pipeline nom="declarer_champs_extras" inclure="base/contrib_declarations.php" />
 	<pipeline nom="autoriser" inclure="contrib_autorisations.php" />
 	<pipeline nom="formulaire_charger" inclure="contrib_pipelines.php" />
+
+	<menu nom="contrib_dashboard" titre="contrib:dashboard_menu" parent="menu_administration" icone="images/dashboard-16.png" action="dashboard" />
 </paquet>

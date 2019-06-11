@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'dashboard_page_titre' => 'Dashboard de SPIP-Contrib',
+	'dashboard_menu' => 'Dashboard SPIP-Contrib',
 
 	// L
 	'type_article_label' => 'Type d\'article',
