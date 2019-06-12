@@ -184,6 +184,8 @@ Pour vérifier les autorisations, réaliser les vérifications et dérouler les 
 1. configurer SVP dans le mode “non run-time” qui permet le chargement de l’ensemble des plugins disponibles qu’ils soient ou pas compatibles avec la version SPIP de Contrib.
 1. intégrer dans la base les mêmes dépôts que sur Plugins SPIP.
 
+## SVP Typologie
+
 En outre, le plugin SVP devra être adapté pour prendre en compte la nouvelle liste des catégories avec ses deux niveaux.
 
 ## Exclure secteur

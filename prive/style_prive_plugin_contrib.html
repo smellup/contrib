@@ -27,9 +27,12 @@
 #navigation .infos .liste-items.auteurs .item.auteur { border-top: 0;}
 
 /* Couleurs des catégories de niveau 1 */
-<BOUCLE_couleurs(DATA){source table, #VAL{1}|svp_lister_categorie}>
-.couleur_[(#VALEUR)] { color: [#(#VALEUR|rubrique_determiner_couleur)]; }
-</BOUCLE_couleurs>
+<BOUCLE_couleurs_categorie(MOTS)
+	{id_groupe=#CONFIG{svptype/typologies/categorie/id_groupe}}
+	{profondeur=0}
+>
+.couleur_[(#IDENTIFIANT)] { color: [#(#IDENTIFIANT|rubrique_determiner_couleur)]; }
+</BOUCLE_couleurs_categorie>
 
 /* Catégorie et préfixe dans le bloc rubrique de la liste des rubriques du privé */
 .sous-rub .inner .bd .descriptif span.plugin { font-weight: bold; }

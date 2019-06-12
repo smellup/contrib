@@ -12,23 +12,18 @@
 ]
 
 [(#REM) Déterminer les data en fonction du contexte ]
-#SET{data, #ARRAY}
-<BOUCLE_secteur(RUBRIQUES) {id_rubrique}>
-[(#PROFONDEUR|=={0}|oui) #SET{data, #VAL{1}|svp_lister_categorie}]
-[(#PROFONDEUR|=={1}|oui) #SET{data, #VAL{2}|svp_lister_categorie{#INFO_CATEGORIE{rubrique, #ID_PARENT}}}]
-</BOUCLE_secteur>
+<BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
+#SET{niveau, racine}
+#SET{parent, 0}
+[(#PROFONDEUR|=={1}|oui)
+	#SET{niveau, feuille}
+	#SET{parent, #INFO_CATEGORIE{rubrique, #ID_PARENT}}
+]
 
-
-<B_categories>
-<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] >
-	[<option value=""[ (#ENV{valeur}|non)selected="selected"]>
-		(#ENV{option_intro}|et{#PROFONDEUR|=={0}}|oui)
-	</option>]
-<BOUCLE_categories(DATA) {source table, #GET{data}}>
-	[(#SET{value, [(#CLE|is_string|?{#CLE, #VALEUR})]})]
-	<option value="#GET{value}"[ (#ENV{valeur}|=={#GET{value}}|oui)selected="selected"]>
-		#VALEUR
-	</option>
-</BOUCLE_categories>
-</select>
-</B_categories>
+[(#INCLURE{fond=saisies/selection_type_plugin,
+	typologie=categorie,
+	niveau_affiche=#GET{niveau},
+	parent=#GET{parent},
+	env}
+)]
+</BOUCLE_rubrique>
