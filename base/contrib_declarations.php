@@ -19,10 +19,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function contrib_declarer_champs_extras($champs = array()) {
 
 	// Table : spip_rubriques, on initialise les champs extras de la table.
-	if (!is_array($champs['spip_rubriques'])) {
-		$champs['spip_rubriques'] = array();
-	}
-
 	// Ajout de la catégorie de plugin. La saisie est une sélection particulière.
 	$champs['spip_rubriques']['categorie'] = array(
 		'saisie'  => 'rubrique_categorie',
@@ -66,10 +62,6 @@ function contrib_declarer_champs_extras($champs = array()) {
 	);
 
 	// Table : spip_rubriques, on initialise les champs extras de la table.
-	if (!is_array($champs['spip_articles'])) {
-		$champs['spip_articles'] = array();
-	}
-
 	// Ajout de la catégorie de plugin. La saisie est une sélection particulière.
 	$champs['spip_articles']['type_article'] = array(
 		'saisie'  => 'article_type',
