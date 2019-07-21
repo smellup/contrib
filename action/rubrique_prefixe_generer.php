@@ -29,7 +29,7 @@ function action_rubrique_prefixe_generer_dist(){
 	// Actualisation des rubriques-plugin :
 	// Un rubrique-plugin a une profondeur de 2 et est incluse dans un secteur-plugin.
 	// -- on récupère les secteurs-plugin
-	include_spip('inc:contrib_rubrique');
+	include_spip('inc/contrib_rubrique');
 	$secteurs_plugin = rubrique_lister_secteur_plugin();
 
 	// Pour limiter le nombre de rubriques récupérées, on boucle par secteur.

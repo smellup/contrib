@@ -24,7 +24,7 @@ function contrib_declarer_champs_extras($champs = array()) {
 		'saisie'  => 'rubrique_categorie',
 		'options' => array(
 			'nom'          => 'categorie',
-			'label'        => '<:svp:label_categorie:>',
+			'label'        => '<:svptype:categorie_identifiant_label:>',
 			'option_intro' => '<:contrib:categorie_vide_label:>',
 			'env'          => true,
 			'restrictions' => array(
@@ -60,6 +60,25 @@ function contrib_declarer_champs_extras($champs = array()) {
 		'verifier'   => array(
 		),
 	);
+
+/*	$champs['spip_rubriques']['couleur'] = array(
+		'saisie'  => 'couleur',
+		'options' => array(
+			'nom'          => 'couleur',
+			'label'        => '<:contrib:rubrique_couleur_label:>',
+			'env'          => true,
+			'restrictions' => array(
+				'modifier' => array(
+					'auteur' => 'webmestre',
+				),
+				'voir' => false,
+			),
+			'sql'                    => "varchar(7) DEFAULT '' NOT NULL",
+		),
+		'versionner' => false,
+		'verifier'   => array(
+		),
+	);*/
 
 	// Table : spip_rubriques, on initialise les champs extras de la table.
 	// Ajout de la catégorie de plugin. La saisie est une sélection particulière.

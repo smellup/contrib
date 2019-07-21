@@ -9,7 +9,7 @@
 [(#ID_RUBRIQUE|rubrique_dans_secteur_plugin|oui)
 	[(#SET{categorie_secteur, #ID_RUBRIQUE|rubrique_lire_secteur|rubrique_lire_categorie})]
 	<div class="numero">
-		[(#PREFIXE|?{<:svp:label_prefixe:>, <:svp:label_categorie:>})&nbsp;:]
+		[(#PREFIXE|?{<:svp:label_prefixe:>, <:svptype:categorie_identifiant_label:>})&nbsp;:]
 		<p class="plugin">[<span class="[couleur_(#GET{categorie_secteur})]">(#PREFIXE|sinon{#CATEGORIE})</span>]</p>
 	</div>
 ]

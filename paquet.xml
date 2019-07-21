@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="0.1.0"
 	etat="dev"
-	compatibilite="[3.2.0;3.2.*]"
+	compatibilite="[3.3.0-dev;3.3.*]"
 	logo="contrib_logo-64.png"
 	schema="1"
 >
@@ -18,7 +18,7 @@
 	<necessite nom="article_accueil" compatibilite="[1.1.6;]" />
 	<necessite nom="cextras" compatibilite="[3.11.8;]" />
 	<necessite nom="autorite" compatibilite="[0.10.23;]" />
-	<necessite nom="svptype" compatibilite="[0.1.0;]" />
+	<necessite nom="svptype" compatibilite="[0.2.0;]" />
 
 	<pipeline nom="declarer_champs_extras" inclure="base/contrib_declarations.php" />
 	<pipeline nom="autoriser" inclure="contrib_autorisations.php" />

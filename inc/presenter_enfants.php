@@ -107,7 +107,7 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 			if ($categorie or $prefixe) {
 				include_spip('inc/contrib_rubrique');
 				$classe = 'couleur_' . rubrique_lire_categorie(rubrique_lire_secteur($id_rubrique));
-				$complement = _T('svp:label_' . ($categorie ? 'categorie' : 'prefixe'))
+				$complement = ($categorie ? _T('svptype:categorie_identifiant_label') : _T('svp:label_prefixe'))
 					. "&nbsp;:&nbsp;<span class='plugin ${classe}'>"
 					. ($categorie ? $categorie : $prefixe)
 					. "</span></p>";
