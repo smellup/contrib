@@ -47,7 +47,7 @@ function contrib_declarer_champs_extras($champs = array()) {
 		'options' => array(
 			'nom'          => 'prefixe',
 			'label'        => '<:svp:label_prefixe:>',
-			'env'          => true,
+//			'env'          => true,
 			'restrictions' => array(
 				'modifier' => array(
 					'auteur' => 'webmestre',
@@ -68,14 +68,14 @@ function contrib_declarer_champs_extras($champs = array()) {
 		'options' => array(
 			'nom'          => 'couleur',
 			'label'        => '<:contrib:rubrique_couleur_label:>',
-			'env'          => true,
+//			'env'          => true,
 			'restrictions' => array(
 				'modifier' => array(
 					'auteur' => 'webmestre',
 				),
 				'voir' => false,
 			),
-			'sql'                    => "varchar(7) DEFAULT '' NOT NULL",
+			'sql'          => "varchar(7) DEFAULT '' NOT NULL",
 		),
 		'versionner' => false,
 		'verifier'   => array(
