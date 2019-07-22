@@ -28,10 +28,13 @@
 
 /* Couleurs des catégories de niveau 1 */
 <BOUCLE_couleurs_categorie(MOTS)
-	{id_groupe=#CONFIG{svptype/typologies/categorie/id_groupe}}
+	{technique=oui}
+	{typologie_plugin categorie}
 	{profondeur=0}
 >
-.couleur_[(#IDENTIFIANT)] { color: [#(#IDENTIFIANT|rubrique_determiner_couleur)]; }
+	<BOUCLE_couleur_rubrique(RUBRIQUES) {categorie=#IDENTIFIANT}>
+		[.couleur_[(#_couleurs_categorie:IDENTIFIANT)] { color: (#COULEUR); }]
+	</BOUCLE_couleur_rubrique>
 </BOUCLE_couleurs_categorie>
 
 /* Catégorie et préfixe dans le bloc rubrique de la liste des rubriques du privé */
