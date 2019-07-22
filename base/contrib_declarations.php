@@ -41,6 +41,7 @@ function contrib_declarer_champs_extras($champs = array()) {
 		),
 	);
 
+	// Ajout du préfixe de plugin. La saisie est un input simple.
 	$champs['spip_rubriques']['prefixe'] = array(
 		'saisie'  => 'input',
 		'options' => array(
@@ -61,7 +62,8 @@ function contrib_declarer_champs_extras($champs = array()) {
 		),
 	);
 
-/*	$champs['spip_rubriques']['couleur'] = array(
+	// Ajout de la couleur de rubrique. La saisie est un input particulier (palette).
+	$champs['spip_rubriques']['couleur'] = array(
 		'saisie'  => 'couleur',
 		'options' => array(
 			'nom'          => 'couleur',
@@ -78,7 +80,7 @@ function contrib_declarer_champs_extras($champs = array()) {
 		'versionner' => false,
 		'verifier'   => array(
 		),
-	);*/
+	);
 
 	// Table : spip_rubriques, on initialise les champs extras de la table.
 	// Ajout de la catégorie de plugin. La saisie est une sélection particulière.

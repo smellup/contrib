@@ -28,5 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'rubrique_prefixe_generer_label' => 'Générer les préfixes',
+	'rubrique_couleur_label' => 'Couleur de la rubrique',
 	'plugin_categorie_changer_label' => 'Passer les catégories en v2',
 );

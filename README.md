@@ -173,20 +173,23 @@ Une fois la demande validée, la rubrique-carnet est muée en rubrique-plugin (m
 Les rubriques-catégorie et les rubriques-plugin étant identifiées strictement par les champs ```categorie``` et ```prefixe```, il est possible de déclencher régulièrement ou à la demande (administrateurs complets) des vérifications et des mises à jour, à savoir:
 
 * vérifier que les rubriques-plugin possèdent un préfixe existant et qu’elles sont positionnées dans la bonne catégorie;
-* vérifier le titre des rubriques-catégorie et des rubriques-plugin et les mettre à jour à partir de la base SVP en profitant des traductions. Le descriptif des rubriques-plugin peut aussi être mis à jour.
+* vérifier le titre des rubriques-catégorie et des rubriques-plugin et les mettre à jour à partir de la base SVP Typologie en profitant des traductions si elles existent. Le descriptif des rubriques-plugin peut aussi être mis à jour.
+* vérifier que le préfixe est bien vide pour les rubriques-catégories. 
 
 # Annexe 1 - Plugins utilisés
 
 ## SVP
 
-Pour vérifier les autorisations, réaliser les vérifications et dérouler les workflows, l’utilisation des catégories et des préfixes nécessitent que le plugin SVP soit activé, ce qui n’est pas le cas actuellement. En outre, pour construire la base complète de tous les plugins comme sur Plugins SPIP il faut:
+Pour vérifier les autorisations, réaliser les vérifications et dérouler les workflows, l’utilisation des catégories et des préfixes nécessitent que le plugin SVP soit activé. En outre, pour construire la base complète de tous les plugins comme sur Plugins SPIP il faut:
 
 1. configurer SVP dans le mode “non run-time” qui permet le chargement de l’ensemble des plugins disponibles qu’ils soient ou pas compatibles avec la version SPIP de Contrib.
 1. intégrer dans la base les mêmes dépôts que sur Plugins SPIP.
 
+En outre, le plugin SVP sera modifié et débarrassé de la gestion des catégories qui sera repris par le plugin SVP Typologie.
+
 ## SVP Typologie
 
-En outre, le plugin SVP devra être adapté pour prendre en compte la nouvelle liste des catégories avec ses deux niveaux.
+Ce plugin permettra d'externaliser complètement la gestion des catégories de plugins (et aussi des tags de plugin).
 
 ## Exclure secteur
 
@@ -207,4 +210,6 @@ Ce plugin est utilisé pour identifier unitairement les articles d'aide du secte
 ## Autorité
 
 Ce plugin est utilisé pour identifier le secteur-carnet et lui associer les autorisations nécessaires. 
+
+Ce plugin permettra d'externaliser complètement la gestion des catégories de plugins (et aussi des tags de plugin).
 

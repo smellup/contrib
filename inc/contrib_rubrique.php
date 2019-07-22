@@ -86,26 +86,6 @@ function rubrique_determiner_type($id_rubrique) {
 	return $types[$id_rubrique];
 }
 
-function rubrique_determiner_couleur($categorie) {
-	static $couleurs = array(
-		'activite'           => 'bd87c0',
-		'administration'     => '09b2a3',
-		'auteur'             => '1310b2',
-		'communication'      => 'acbd70',
-		'contenu'            => 'b22ba4',
-		'date'               => '471bb2',
-		'developpement'      => 'dfb811',
-		'interactivite'      => '50699b',
-		'interface-publique' => '40dd5d',
-		'media'              => 'de175f',
-		'navigation'         => 'b26714'
-	);
-
-	$couleur = (!$categorie or empty($couleurs[$categorie])) ? 'b9274d' : $couleurs[$categorie];
-
-	return $couleur;
-}
-
 /**
  * Vérifie que la rubrique concernée fait bien partie du secteur-apropos.
  * Le secteur-apropos est déterminé par la configuration du secteur exclus dans
@@ -213,10 +193,15 @@ function rubrique_dans_secteur_plugin($id_rubrique) {
  *               Liste des id des secteurs-pllugin ou tableau vide.
  */
 function rubrique_lister_secteur_plugin() {
+
+	// On sélectionne les rubriques de profndeur nulle et ayant une catégorie.
 	$from = 'spip_rubriques';
-	$where = array('profondeur=0', 'categorie!=' . sql_quote(''));
+	$where = array(
+		'profondeur=0',
+		'categorie!=' . sql_quote('')
+	);
 	if ($secteurs = sql_allfetsel('id_rubrique', $from, $where)) {
-		$secteurs = array_map('reset', $secteurs);
+		$secteurs = array_column($secteurs, 'id_rubrique');
 	}
 
 	return $secteurs;
