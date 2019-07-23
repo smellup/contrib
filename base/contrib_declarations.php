@@ -1,20 +1,16 @@
 <?php
-
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
 /**
- * Insertion dans le pipeline declarer_tables_objets_sql (SPIP)
+ * Insertion dans le pipeline declarer_tables_objets_sql (SPIP).
  *
  * Declarer les champs categorie et préfixe pour les rubriques.
  *
- * @param array $champs
- * 	La définition des objets SPIP
+ * @param array $champs La définition des objets SPIP
  *
- * @return array
- * 	La définition des objets SPIP modifiés
+ * @return array La définition des objets SPIP modifiés
  */
 function contrib_declarer_champs_extras($champs = array()) {
 
@@ -47,7 +43,6 @@ function contrib_declarer_champs_extras($champs = array()) {
 		'options' => array(
 			'nom'          => 'prefixe',
 			'label'        => '<:svp:label_prefixe:>',
-//			'env'          => true,
 			'restrictions' => array(
 				'modifier' => array(
 					'auteur' => 'webmestre',
@@ -68,7 +63,6 @@ function contrib_declarer_champs_extras($champs = array()) {
 		'options' => array(
 			'nom'          => 'couleur',
 			'label'        => '<:contrib:rubrique_couleur_label:>',
-//			'env'          => true,
 			'restrictions' => array(
 				'modifier' => array(
 					'auteur' => 'webmestre',

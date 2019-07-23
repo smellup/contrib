@@ -1,7 +1,10 @@
 <?php
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
- * Installation/maj du plugin
+ * Installation/maj du plugin.
  *
  * Crée les champs categorie et préfixe pour les rubriques
  *
@@ -12,6 +15,7 @@ function contrib_upgrade($nom_meta_base_version, $version_cible) {
 
 	$maj = array();
 
+	// Ajout des colonnes supplémentaires dans les tables spip_rubriques et spip_articles.
 	include_spip('inc/cextras');
 	include_spip('base/contrib_declarations');
 	cextras_api_upgrade(contrib_declarer_champs_extras(), $maj['create']);
@@ -21,7 +25,7 @@ function contrib_upgrade($nom_meta_base_version, $version_cible) {
 }
 
 /**
- * Désinstalle les données du plugin
+ * Désinstalle les données du plugin.
  *
  * Supprime les champs categorie et préfixe pour les rubriques
  *
@@ -29,6 +33,7 @@ function contrib_upgrade($nom_meta_base_version, $version_cible) {
  */
 function contrib_vider_tables($nom_meta_base_version) {
 
+	// Suppression des colonnes ajoutées à l'installation.
 	include_spip('inc/cextras');
 	include_spip('base/contrib_declarations');
 	cextras_api_vider_tables(contrib_declarer_champs_extras());

@@ -2,10 +2,10 @@
 /**
  * Ce fichier contient l'action `rubrique_prefixe_generer` utilisée lors de la migration
  * pour actualiser le préfixe des rubrique-plugin à partir de l'url sur Plugins SPIP si elle existe.
- *
  */
-
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Cette action permet d'actualiser le préfixe des rubrique-plugin à partir de l'url
@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @return void
  */
-function action_rubrique_prefixe_generer_dist(){
+function action_rubrique_prefixe_generer_dist() {
 
 	// Securisation: aucun argument attendu.
 
