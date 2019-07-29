@@ -83,7 +83,7 @@ function enfant_rub($collection, $debut = 0, $limite = 500) {
 			// déterminer l'icone de la rubrique.
 			include_spip('inc/contrib_rubrique');
 			$type = rubrique_determiner_type($id_rubrique);
-			$icone = $prefixe
+			$icone = (($type == 'plugin') and $prefixe)
 				? 'plugin-24.png'
 				: ($id_parent ? 'rubrique' : 'secteur') . ($type ? '_' . $type : '') . '-24.png';
 
