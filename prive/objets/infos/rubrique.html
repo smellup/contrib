@@ -1,6 +1,6 @@
 <BOUCLE_rub(RUBRIQUES){id_rubrique=#ENV{id}}{statut?}{!lang_select}>
-<div class='infos'>
-	<div class='numero'><:titre_numero_rubrique:><p>#ID_RUBRIQUE</p></div>
+<div class="infos">
+	<div class="numero"><:titre_numero_rubrique:><p>#ID_RUBRIQUE</p></div>
 [(#REM)
 
 	Identifier le type de la rubrique de la rubrique et en particulier la catégorie ou le préfixe.
@@ -8,10 +8,10 @@
 ]
 [(#ID_RUBRIQUE|rubrique_dans_secteur_plugin|oui)
 	[(#SET{categorie_secteur, #ID_RUBRIQUE|rubrique_lire_secteur|rubrique_lire_categorie})]
-	<div class="numero">
-		[(#PROFONDEUR|=={2}|?{<:svp:label_prefixe:>, <:svptype:categorie_identifiant_label:>})&nbsp;:]
+	[<div class="numero">
+		(#PROFONDEUR|=={2}|?{<:svp:label_prefixe:>, <:svptype:categorie_identifiant_label:>})&nbsp;:
 		<p class="plugin">[<span class="[couleur_(#GET{categorie_secteur})]">(#PROFONDEUR|=={2}|?{#PREFIXE, #CATEGORIE})</span>]</p>
-	</div>
+	</div>]
 ]
 
 [(#REM)
@@ -29,7 +29,7 @@
 	[<p class="pagination">(#PAGINATION{prive})</p>]
 </B_admins>
 
-	<div class='nb_elements'>
+	<div class="nb_elements">
 	<BOUCLE_arts(ARTICLES){id_rubrique}> </BOUCLE_arts><div>[(#TOTAL_BOUCLE|singulier_ou_pluriel{info_articles_un,info_articles_nb})]</div></B_arts>
 	<BOUCLE_rubs(RUBRIQUES){id_parent}> </BOUCLE_rubs><div>[(#TOTAL_BOUCLE|singulier_ou_pluriel{info_rubriques_un,info_rubriques_nb})]</div></B_rubs>
 	<!--nb_elements-->
@@ -38,7 +38,7 @@
 [(#AUTORISER{supprimer,rubrique,#ID_RUBRIQUE}|oui)
 	[(#URL_ACTION_AUTEUR{supprimer_rubrique,#ID_RUBRIQUE,#ID_PARENT|?{#URL_ECRIRE{rubrique,id_rubrique=#ID_PARENT},#URL_ECRIRE{rubriques}}}|icone_horizontale{<:icone_supprimer_rubrique:>,rubrique,del})]
 ]
-
+<br class="clear" />
 
 [(#REM)
 
