@@ -26,10 +26,14 @@ function contrib_affiche_droite($flux) {
 	include_spip('inc/config');
 	$objets_config = lire_config('couleur_objet/objets', array());
 
+	include_spip('inc/svptype_type_plugin');
 	if (
 		in_array('spip_mots', $objets_config) // si configuration objets ok
 		and ($exec == 'type_plugin') // page d'un objet éditorial
 		and ($id_objet = intval($flux['args']['id_mot']))
+		and ($typologie = _request('typologie'))
+		and ($typologie == 'categorie')
+		and (type_plugin_lire($typologie, $id_objet, 'profondeur') == 0)
 	) {
 		$couleur = sql_getfetsel(
 			'couleur_objet',

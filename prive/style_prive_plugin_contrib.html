@@ -33,7 +33,7 @@
 	{profondeur=0}
 >
 	<BOUCLE_couleur_rubrique(RUBRIQUES) {categorie=#IDENTIFIANT}>
-		[.couleur_[(#_couleurs_categorie:IDENTIFIANT)] { color: (#COULEUR); }]
+		[.couleur_[(#_couleurs_categorie:IDENTIFIANT)] \{ color: (#CHAMP_SQL{couleur}); \}]
 	</BOUCLE_couleur_rubrique>
 </BOUCLE_couleurs_categorie>
 
