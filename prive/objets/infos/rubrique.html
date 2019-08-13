@@ -1,11 +1,11 @@
 <BOUCLE_rub(RUBRIQUES){id_rubrique=#ENV{id}}{statut?}{!lang_select}>
 <div class="infos">
-	<div class="numero"><:titre_numero_rubrique:><p>#ID_RUBRIQUE</p></div>
-[(#REM)
+	<div class="numero">
+		<:titre_numero_rubrique:>
+		<p>#ID_RUBRIQUE</p>
+	</div>
 
-	Identifier le type de la rubrique de la rubrique et en particulier la catégorie ou le préfixe.
-
-]
+[(#REM) Identifier le type de la rubrique de la rubrique et en particulier la catégorie ou le préfixe. ]
 [(#ID_RUBRIQUE|rubrique_dans_secteur_plugin|oui)
 	[(#SET{categorie_secteur, #ID_RUBRIQUE|rubrique_lire_secteur|rubrique_lire_categorie})]
 	[<div class="numero">

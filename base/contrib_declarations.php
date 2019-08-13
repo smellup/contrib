@@ -57,25 +57,6 @@ function contrib_declarer_champs_extras($champs = array()) {
 		),
 	);
 
-	// Ajout de la couleur de rubrique. La saisie est un input particulier (palette).
-	$champs['spip_rubriques']['couleur'] = array(
-		'saisie'  => 'couleur',
-		'options' => array(
-			'nom'          => 'couleur',
-			'label'        => '<:contrib:rubrique_couleur_label:>',
-			'restrictions' => array(
-				'modifier' => array(
-					'auteur' => 'webmestre',
-				),
-				'voir' => false,
-			),
-			'sql'          => "varchar(7) DEFAULT '' NOT NULL",
-		),
-		'versionner' => false,
-		'verifier'   => array(
-		),
-	);
-
 	// Table : spip_rubriques, on initialise les champs extras de la table.
 	// Ajout de la catégorie de plugin. La saisie est une sélection particulière.
 	$champs['spip_articles']['type_article'] = array(

@@ -4,8 +4,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 // fonction pour le pipeline, n'a rien a effectuer
-function contrib_autoriser(){}
-
+function contrib_autoriser() {
+}
 
 /**
  * Autorisation de modifier le champ extra catégorie d'une rubrique.
@@ -25,6 +25,7 @@ function contrib_autoriser(){}
  * 		L'auteur connecté
  * @param $options
  *      Contient le contexte de la saisie mais n'est pas utilisé.
+ * @param mixed $opt
  *
  * @return bool
  */
@@ -63,7 +64,6 @@ function autoriser_rubrique_modifierextra_categorie($faire, $type, $id, $qui, $o
 	return $autoriser;
 }
 
-
 /**
  * Autorisation de modifier le champ extra préfixe d'une rubrique.
  * Il faut :
@@ -83,6 +83,7 @@ function autoriser_rubrique_modifierextra_categorie($faire, $type, $id, $qui, $o
  * 		L'auteur connecté
  * @param $options
  *      Contient le contexte de la saisie mais n'est pas utilisé.
+ * @param mixed $opt
  *
  * @return bool
  */
@@ -104,56 +105,6 @@ function autoriser_rubrique_modifierextra_prefixe($faire, $type, $id, $qui, $opt
 				// de la profondeur).
 				if ($id_parent = rubrique_lire_parent($id_rubrique)
 				and rubrique_lire_categorie($id_parent)) {
-					$autoriser =true;
-				}
-			}
-		}
-	}
-
-	return $autoriser;
-}
-
-
-/**
- * Autorisation de modifier le champ extra couleur d'un secteur.
- * Il faut :
- * - être un webmestre,
- * - que la rubrique ait une profondeur égale à 0 (secteur),
- * - que le secteur ne soit ni un secteur-carnet, ni un secteur-apropos, ni un secteur-galaxie.
- *
- * @param $faire
- * 		L'action se nomme modifierextra
- * @param $type
- * 		Le type est toujours rubrique.
- * @param $id
- * 		Id de la rubrique concernée.
- * @param $qui
- * 		L'auteur connecté
- * @param $options
- *      Contient le contexte de la saisie mais n'est pas utilisé.
- *
- * @return bool
- */
-function autoriser_rubrique_modifierextra_couleur($faire, $type, $id, $qui, $opt) {
-
-	// Par défaut la modification est interdite.
-	$autoriser = false;
-
-	// Seuls les webmestres peuvent configurer le préfixe d'une rubrique-plugin.
-	if (autoriser('webmestre')) {
-		if ($id_rubrique = intval($id)) {
-			// On vérifie si la rubrique est dans un secteur à exclure (non plugin).
-			// - le carnet wiki
-			// - le secteur apropos
-			// - le secteur galaxie
-			include_spip('inc/contrib_rubrique');
-			if (!rubrique_dans_secteur_apropos($id_rubrique)
-				and !rubrique_dans_secteur_carnet($id_rubrique)
-				and !rubrique_dans_secteur_galaxie($id_rubrique)) {
-				// On vérifie la profondeur de la rubrique qui ne peut-être que 0 (secteur).
-				$profondeur = rubrique_lire_profondeur($id_rubrique);
-				if (($profondeur !== null)
-					and ($profondeur == 0)) {
 					$autoriser = true;
 				}
 			}

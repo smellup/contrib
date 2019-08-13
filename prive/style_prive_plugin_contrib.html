@@ -32,9 +32,7 @@
 	{typologie_plugin categorie}
 	{profondeur=0}
 >
-	<BOUCLE_couleur_rubrique(RUBRIQUES) {categorie=#IDENTIFIANT}>
-		[.couleur_[(#_couleurs_categorie:IDENTIFIANT)] \{ color: (#CHAMP_SQL{couleur}); \}]
-	</BOUCLE_couleur_rubrique>
+	[.couleur_[(#IDENTIFIANT)] \{ color: (#COULEUR); \}]
 </BOUCLE_couleurs_categorie>
 
 /* Catégorie et préfixe dans le bloc rubrique de la liste des rubriques du privé */
