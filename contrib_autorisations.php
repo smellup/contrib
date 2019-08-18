@@ -64,13 +64,14 @@ function autoriser_rubrique_modifierextra_categorie($faire, $type, $id, $qui, $o
 			and !rubrique_dans_secteur_galaxie($id_rubrique)) {
 				// On vérifie la profondeur de la rubrique qui ne peut-être que 0 ou 1
 				// et si 1, on vérifie que la rubrique parent a une catégorie non vide.
-				$profondeur = rubrique_lire_profondeur($id_rubrique);
+				$rubrique = rubrique_lire($id_rubrique);
+				$profondeur = intval($rubrique['profondeur']);
 				if (($profondeur !== null)
 				and ($profondeur < 2)) {
 					if (($profondeur == 0)
 					or (($profondeur == 1)
-						and ($id_parent = rubrique_lire_parent($id_rubrique))
-						and rubrique_lire_categorie($id_parent))) {
+						and ($id_parent = intval($rubrique['id_parent']))
+						and rubrique_lire($id_parent, 'categorie'))) {
 						$autoriser = true;
 					}
 				}
@@ -114,14 +115,15 @@ function autoriser_rubrique_modifierextra_prefixe($faire, $type, $id, $qui, $opt
 		if ($id_rubrique = intval($id)) {
 			// On vérifie la profondeur de la rubrique qui ne peut-être que 2.
 			include_spip('inc/contrib_rubrique');
-			$profondeur = rubrique_lire_profondeur($id_rubrique);
+			$rubrique = rubrique_lire($id_rubrique);
+			$profondeur = intval($rubrique['profondeur']);
 			if (($profondeur !== null)
 			and ($profondeur == 2)) {
 				// On vérifie que l'on est bien dans une rubrique-categorie ce qui implique la rubrique
 				// parente possède une catégorie non vide (la rubrique parent n'est jamais un secteur du fait
 				// de la profondeur).
-				if ($id_parent = rubrique_lire_parent($id_rubrique)
-				and rubrique_lire_categorie($id_parent)) {
+				if (($id_parent = intval($rubrique['id_parent']))
+				and rubrique_lire($id_parent, 'categorie')) {
 					$autoriser = true;
 				}
 			}

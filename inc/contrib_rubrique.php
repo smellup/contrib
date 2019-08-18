@@ -137,18 +137,6 @@ function rubrique_debloquer_edition($id_auteur) {
 	}
 }
 
-function rubrique_lire_profondeur($id_rubrique) {
-	static $profondeurs = array();
-
-	if (!isset($profondeurs[$id_rubrique])) {
-		$from = 'spip_rubriques';
-		$where = array('id_rubrique=' . intval($id_rubrique));
-		$profondeurs[$id_rubrique] = sql_getfetsel('profondeur', $from, $where);
-	}
-
-	return $profondeurs[$id_rubrique];
-}
-
 function rubrique_lire_parent($id_rubrique) {
 	static $ids_parent = array();
 
