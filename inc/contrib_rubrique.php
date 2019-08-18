@@ -137,35 +137,14 @@ function rubrique_debloquer_edition($id_auteur) {
 	}
 }
 
-function rubrique_lire_secteur($id_rubrique) {
-	static $ids_secteur = array();
-
-	if (!isset($ids_secteur[$id_rubrique])) {
-		$ids_secteur[$id_rubrique] = 0;
-
-		$from = 'spip_rubriques';
-		$where = array('id_rubrique=' . intval($id_rubrique));
-		$id = sql_getfetsel('id_secteur', $from, $where);
-		if ($id !== null) {
-			$ids_secteur[$id_rubrique] = $id;
-		}
-	}
-
-	return $ids_secteur[$id_rubrique];
-}
-
-function rubrique_lire_categorie($id_rubrique) {
+function rubrique_lire_categorie_secteur($id_rubrique) {
 	static $categories = array();
 
 	if (!isset($categories[$id_rubrique])) {
 		$categories[$id_rubrique] = '';
 
-		$from = 'spip_rubriques';
-		$where = array('id_rubrique=' . intval($id_rubrique));
-		$categorie = sql_getfetsel('categorie', $from, $where);
-		if ($categorie !== null) {
-			$categories[$id_rubrique] = $categorie;
-		}
+		$id_secteur = rubrique_lire($id_rubrique, 'id_secteur');
+		$categories[$id_rubrique] = rubrique_lire($id_secteur, 'categorie');
 	}
 
 	return $categories[$id_rubrique];
@@ -294,7 +273,7 @@ function rubrique_dans_secteur_plugin($id_rubrique) {
 	if (!isset($est_plugin[$id_rubrique])) {
 		$est_plugin[$id_rubrique] = false;
 
-		if (rubrique_lire_categorie(rubrique_lire_secteur($id_rubrique))) {
+		if (rubrique_lire_categorie_secteur($id_rubrique)) {
 			$est_plugin[$id_rubrique] = true;
 		}
 	}
