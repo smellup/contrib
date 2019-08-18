@@ -137,23 +137,6 @@ function rubrique_debloquer_edition($id_auteur) {
 	}
 }
 
-function rubrique_lire_parent($id_rubrique) {
-	static $ids_parent = array();
-
-	if (!isset($ids_parent[$id_rubrique])) {
-		$ids_parent[$id_rubrique] = 0;
-
-		$from = 'spip_rubriques';
-		$where = array('id_rubrique=' . intval($id_rubrique));
-		$id = sql_getfetsel('id_parent', $from, $where);
-		if ($id !== null) {
-			$ids_parent[$id_rubrique] = $id;
-		}
-	}
-
-	return $ids_parent[$id_rubrique];
-}
-
 function rubrique_lire_secteur($id_rubrique) {
 	static $ids_secteur = array();
 
