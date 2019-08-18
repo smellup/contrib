@@ -26,5 +26,5 @@
 	<pipeline nom="formulaire_charger" inclure="contrib_pipelines.php" />
 	<pipeline nom="affiche_droite" inclure="contrib_pipelines.php" />
 
-	<menu nom="contrib_dashboard" titre="contrib:dashboard_menu" parent="menu_administration" icone="images/dashboard-16.png" action="dashboard" />
+	<menu nom="contrib" titre="contrib:dashboard_menu" parent="menu_administration" icone="images/dashboard-16.png" action="dashboard" />
 </paquet>

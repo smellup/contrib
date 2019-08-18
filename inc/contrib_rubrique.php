@@ -60,6 +60,83 @@ function rubrique_lire($id_rubrique, $informations = array()) {
 	return $description;
 }
 
+/**
+ * Renvoie l'information brute demandée pour l'ensemble des types de plugins d'une typologie donnée
+ * ou toute les descriptions si aucune information n'est explicitement demandée.
+ *
+ * @api
+ *
+ * @param string $typologie    Typologie concernée : categorie, tag...
+ * @param array  $filtres      Liste des couples (champ, valeur) ou tableau vide.
+ * @param array  $informations Identifiant d'un champ ou de plusieurs champs de la description d'un type de plugin.
+ *                             Si l'argument est vide, la fonction renvoie les descriptions complètes.
+ *
+ * @return array Description complète ou information précise pour chaque type de plugin de la typologie concernée.
+ */
+function rubrique_repertorier($filtres = array(), $informations = array()) {
+
+	// On récupère la description complète de toutes les rubriques
+	// -- Table, colonnes et tri
+	$from = array('spip_rubriques');
+	$select = '*';
+	$order_by = array('id_rubrique');
+
+	// -- Calcul du where à partir des filtres.
+	$where = array();
+	if ($filtres) {
+		foreach ($filtres as $_champ => $_critere) {
+			$operateur = '=';
+			$valeur = $_critere;
+			if (substr($_critere, 0, 1) == '!') {
+				$operateur = '!=';
+				$valeur = ltrim($_critere, '!');
+			}
+			$where[] = $_champ . $operateur . (intval($valeur) ? intval($valeur) : sql_quote($valeur));
+		}
+	}
+
+	// -- Appel SQL
+	$rubriques_description = sql_allfetsel($select, $from, $where, '', $order_by);
+
+	// Refactoring du tableau suivant les champs demandés.
+	if (!$informations) {
+		$rubriques = $rubriques_description;
+	} else {
+		$rubriques = array();
+		$informations = array_flip($informations);
+		foreach ($rubriques_description as $_cle => $_rubrique) {
+			$rubriques[] = array_intersect_key($rubriques_description[$_cle], $informations);
+		}
+	}
+
+	return $rubriques;
+}
+
+/**
+ * Libère, pour l'auteur l'ayant demandé, les éditions sur les rubriques.
+ *
+ * @uses lire_tableau_edition()
+ * @uses ecrire_tableau_edition()
+ *
+ * @param int $id_auteur Identifiant de l'auteur
+ *
+ * @return void
+ */
+function rubrique_debloquer_edition($id_auteur) {
+	$edition = lire_tableau_edition();
+
+	foreach ($edition as $_objet => $_data) {
+		if ($_objet == 'rubrique') {
+			foreach ($_data as $_id => $_auteurs) {
+				if (isset($_auteurs[$id_auteur])) {
+					unset($edition[$_objet][$_id][$id_auteur]);
+					ecrire_tableau_edition($edition);
+				}
+			}
+		}
+	}
+}
+
 function rubrique_lire_profondeur($id_rubrique) {
 	static $profondeurs = array();
 

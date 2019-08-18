@@ -1,6 +1,6 @@
 <?php
 /**
- * Ce fichier contient l'action `rubrique_prefixe_generer` utilisée lors de la migration
+ * Ce fichier contient l'action `rubrique_plugin_generer_prefixe` utilisée lors de la migration
  * pour actualiser le préfixe des rubrique-plugin à partir de l'url sur Plugins SPIP si elle existe.
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @return void
  */
-function action_rubrique_prefixe_generer_dist() {
+function action_rubrique_plugin_generer_prefixe_dist() {
 
 	// Securisation: aucun argument attendu.
 
@@ -41,20 +41,25 @@ function action_rubrique_prefixe_generer_dist() {
 		if ($rubriques_plugin) {
 			// Pour chaque rubrique-plugin on identifie si il existe un article possédant une url_site
 			// pointant vers plugins spip car le basename est égal au préfixe (http[s]://plugins.spip.net/prefixe[.html]).
+			include_spip('action/editer_objet');
 			foreach ($rubriques_plugin as $_rubrique) {
 				$from = 'spip_articles';
 				$where = array('id_rubrique=' . intval($_rubrique['id_rubrique']));
-				if ($urls = sql_allfetsel('url_site, id_article', $from, $where)) {
+				if ($urls = sql_allfetsel(array('url_site', 'id_article'), $from, $where)) {
 					foreach ($urls as $_url) {
+						$set = array();
 						if ($_url['url_site']
 						and ((stripos($_url['url_site'], 'https://plugins.spip.net/') === 0)
 							or (stripos($_url['url_site'], 'http://plugins.spip.net/') === 0))) {
-							$maj['prefixe'] = basename($_url['url_site'], '.html');
-							sql_updateq('spip_rubriques', $maj, $where);
+							$set['prefixe'] = basename($_url['url_site'], '.html');
+							objet_modifier('rubrique', intval($_rubrique['id_rubrique']), $set);
 						}
 					}
 				}
 			}
 		}
 	}
+
+	// TODO : ajouter le déblocage de toutes les éditions de l'auteur
+	rubrique_debloquer_edition($GLOBALS['visiteur_session']['id_auteur']);
 }

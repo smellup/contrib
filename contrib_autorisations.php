@@ -8,6 +8,23 @@ function contrib_autoriser() {
 }
 
 /**
+ * Autorisation minimale d'accès à toutes les pages du plugin Contrib.
+ * Par défaut, seuls les administrateurs complets sont autorisés à utiliser le plugin.
+ * Cette autorisation est à la base de la plupart des autres autorisations du plugin.
+ *
+ * @param $faire
+ * @param $type
+ * @param $id
+ * @param $qui
+ * @param $options
+ *
+ * @return bool
+ */
+function autoriser_contrib_dist($faire, $type, $id, $qui, $options) {
+	return autoriser('defaut');
+}
+
+/**
  * Autorisation de modifier le champ extra catégorie d'une rubrique.
  * Il faut :
  * - être un webmestre,
@@ -110,6 +127,26 @@ function autoriser_rubrique_modifierextra_prefixe($faire, $type, $id, $qui, $opt
 			}
 		}
 	}
+
+	return $autoriser;
+}
+
+/**
+ * Autorisation d'affichage du menu d'accès à gestion des typologies de plugin (page=svptype_typologie).
+ * Il faut être autorisé à utiliser le plugin.
+ *
+ * @param $faire
+ * @param $type
+ * @param $id
+ * @param $qui
+ * @param $options
+ *
+ * @return bool
+ */
+function autoriser_contrib_menu_dist($faire, $type, $id, $qui, $options) {
+
+	// Initialisation de l'autorisation
+	$autoriser = autoriser('contrib');
 
 	return $autoriser;
 }
