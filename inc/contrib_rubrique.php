@@ -214,7 +214,9 @@ function rubrique_dans_secteur_apropos($id_rubrique) {
 	include_spip('inc/config');
 	$apropos = lire_config('secteur/exclure_sect', array());
 
-	if ($apropos and in_array(rubrique_lire_secteur($id_rubrique), $apropos)) {
+	if ($apropos
+	and ($id_secteur = intval(rubrique_lire($id_rubrique, 'id_secteur')))
+	and in_array($id_secteur, $apropos)) {
 		$est_apropos = true;
 	}
 
@@ -239,7 +241,9 @@ function rubrique_dans_secteur_carnet($id_rubrique) {
 	include_spip('inc/config');
 	$carnet = lire_config('autorite/espace_wiki', array());
 
-	if ($carnet and in_array(rubrique_lire_secteur($id_rubrique), $carnet)) {
+	if ($carnet
+	and ($id_secteur = intval(rubrique_lire($id_rubrique, 'id_secteur')))
+	and in_array($id_secteur, $carnet)) {
 		$est_carnet = true;
 	}
 
@@ -264,7 +268,9 @@ function rubrique_dans_secteur_galaxie($id_rubrique) {
 	include_spip('inc/config');
 	$galaxie = lire_config('contrib/secteurs', array());
 
-	if ($galaxie and in_array(rubrique_lire_secteur($id_rubrique), $galaxie)) {
+	if ($galaxie
+	and ($id_secteur = intval(rubrique_lire($id_rubrique, 'id_secteur')))
+	and in_array($id_secteur, $galaxie)) {
 		$est_galaxie = true;
 	}
 
