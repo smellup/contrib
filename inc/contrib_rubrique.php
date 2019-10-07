@@ -207,12 +207,9 @@ function rubrique_dans_secteur_apropos($id_rubrique) {
  * Le secteur-carnet est déterminé par la configuration de l'espace wiki dans le plugin
  * Autorité.
  *
- * @param int   $id
- *                           Id de la rubrique concernée.
- * @param mixed $id_rubrique
+ * @param mixed $id_rubrique Id de la rubrique concernée.
  *
- * @return bool
- *              True si la rubrique fait partie du secteur-carnet, false sinon.
+ * @return bool True si la rubrique fait partie du secteur-carnet, false sinon.
  */
 function rubrique_dans_secteur_carnet($id_rubrique) {
 	$est_carnet = false;
@@ -230,16 +227,12 @@ function rubrique_dans_secteur_carnet($id_rubrique) {
 }
 
 /**
- * Vérifie que la rubrique concernée fait bien partie du secteur-carnet.
- * Le secteur-carnet est déterminé par la configuration de l'espace wiki dans le plugin
- * Autorité.
+ * Vérifie que la rubrique concernée fait bien partie du secteur-galaxie.
+ * Les secteurs-galaxie sont déterminés par une configuration du plugin Contrib.
  *
- * @param int   $id
- *                           Id de la rubrique concernée.
- * @param mixed $id_rubrique
+ * @param mixed $id_rubrique Id de la rubrique concernée.
  *
- * @return bool
- *              True si la rubrique fait partie du secteur-carnet, false sinon.
+ * @return bool True si la rubrique fait partie du secteur-galaxie, false sinon.
  */
 function rubrique_dans_secteur_galaxie($id_rubrique) {
 	$est_galaxie = false;

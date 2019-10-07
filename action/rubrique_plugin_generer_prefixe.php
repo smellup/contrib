@@ -60,6 +60,6 @@ function action_rubrique_plugin_generer_prefixe_dist() {
 		}
 	}
 
-	// TODO : ajouter le déblocage de toutes les éditions de l'auteur
+	// Déblocage de toutes les éditions de l'auteur
 	rubrique_debloquer_edition($GLOBALS['visiteur_session']['id_auteur']);
 }
