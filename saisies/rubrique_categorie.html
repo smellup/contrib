@@ -12,18 +12,23 @@
 ]
 
 [(#REM) Déterminer les data en fonction du contexte ]
-<BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
 #SET{niveau, racine}
 #SET{parent, 0}
+<BOUCLE_rubrique(RUBRIQUES) {id_rubrique}{tout}>
 [(#PROFONDEUR|=={1}|oui)
 	#SET{niveau, feuille}
 	#SET{parent, #INFO_CATEGORIE{rubrique, #ID_PARENT}}
 ]
+</BOUCLE_rubrique>
+[(#ENV{id_parent}|oui)
+	#SET{niveau, feuille}
+	#SET{parent, #INFO_CATEGORIE{rubrique, #ENV{id_parent}}}
+]
+<//B_rubrique>
 
 [(#INCLURE{fond=saisies/selection_type_plugin,
-	typologie=categorie,
-	niveau_affiche=#GET{niveau},
-	parent=#GET{parent},
-	env}
+typologie=categorie,
+niveau_affiche=#GET{niveau},
+parent=#GET{parent},
+env}
 )]
-</BOUCLE_rubrique>

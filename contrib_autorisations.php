@@ -53,25 +53,40 @@ function autoriser_rubrique_modifierextra_categorie($faire, $type, $id, $qui, $o
 
 	// Seuls les webmestres peuvent configurer la catégorie d'une rubrique.
 	if (autoriser('webmestre')) {
-		if ($id_rubrique = intval($id)) {
-			// On vérifie si la rubrique est dans un secteur à exclure (non plugin).
-			// - le carnet wiki
-			// - le secteur apropos
-			// - le secteur galaxie
-			include_spip('inc/contrib_rubrique');
-			if (!rubrique_dans_secteur_apropos($id_rubrique)
-			and !rubrique_dans_secteur_carnet($id_rubrique)
-			and !rubrique_dans_secteur_galaxie($id_rubrique)) {
-				// On vérifie la profondeur de la rubrique qui ne peut-être que 0 ou 1
-				// et si 1, on vérifie que la rubrique parent a une catégorie non vide.
-				$rubrique = rubrique_lire($id_rubrique);
-				$profondeur = intval($rubrique['profondeur']);
-				if (($profondeur !== null)
-				and ($profondeur < 2)) {
+		include_spip('inc/contrib_rubrique');
+		$id_parent = isset($opt['contexte']['id_parent']) ? intval($opt['contexte']['id_parent']) : null;
+		if (!is_null($id_parent)) {
+			if (!$id_parent) {
+				// La rubrique parent est nulle: la rubrique en cours de création ou de modification est un secteur.
+				if ($id == 'oui') {
+					// Création d'un secteur: on autorise car c'est plus surement un secteur plugin.
+					$autoriser = true;
+				} else {
+					// Modification d'un secteur: on autorise si ce n'est pas apropos, carnet ou galaxie sinon
+					// l'autorisation est refusée.
+					if (($id_rubrique = intval($id))
+						and !rubrique_dans_secteur_apropos($id_rubrique)
+						and !rubrique_dans_secteur_carnet($id_rubrique)
+						and !rubrique_dans_secteur_galaxie($id_rubrique)) {
+						$autoriser = true;
+					}
+				}
+			} else {
+				// La rubrique parent est a minima un secteur. Il faudra donc tester la profondeur de la rubrique
+				// en cours de traitement qui ne doit pas dépasser 1.
+				// On vérifie si la rubrique parent est dans un secteur à exclure (non plugin).
+				// - le carnet wiki
+				// - le secteur apropos
+				// - le secteur galaxie
+				if (!rubrique_dans_secteur_apropos($id_parent)
+					and !rubrique_dans_secteur_carnet($id_parent)
+					and !rubrique_dans_secteur_galaxie($id_parent)) {
+					// On vérifie la profondeur de la rubrique parent est égale à 0 et qu'elle a une catégorie
+					// non vide.
+					$parent = rubrique_lire($id_parent);
+					$profondeur = intval($parent['profondeur']);
 					if (($profondeur == 0)
-					or (($profondeur == 1)
-						and ($id_parent = intval($rubrique['id_parent']))
-						and rubrique_lire($id_parent, 'categorie'))) {
+						and ($parent['categorie'])) {
 						$autoriser = true;
 					}
 				}
