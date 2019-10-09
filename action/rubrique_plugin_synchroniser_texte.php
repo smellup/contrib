@@ -1,17 +1,17 @@
 <?php
 /**
- * Ce fichier contient l'action `rubrique_textes_synchroniser` utilisée lors de la migration
- * pour synchroniser le titre et la description d'une rubrique-catégorie avec sa catégorie.
+ * Ce fichier contient l'action `rubrique_plugin_synchroniser_texte` utilisée lors de la migration
+ * pour synchroniser le titre et la description d'une rubrique-plugin avec son plugin.
  */
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
 /**
- * Cette action permet de copier le titre et la description d'une catégorie dans les champs idoines
- * de la rubrique-catégorie associée si elle existe. Seuls les textes non vides sont copiés.
+ * Cette action permet de copier le titre et la description d'un plugin dans les champs idoines
+ * de la rubrique-plugin associée si elle existe.
  *
- * Cette action est réservée aux webmestres. Elle ne nécessite aucun argument.
+ * Cette action est réservée aux webmestres. Elle accepte un argument optionnel pour forcer la mise à jour.
  *
  * @return void
  */
@@ -45,7 +45,7 @@ function action_rubrique_plugin_synchroniser_texte_dist($arguments = null) {
 	$rubriques_plugin = rubrique_repertorier($filtres);
 
 	// Pour chaque rubrique on recherche le titre et le slogan du plugin associé pour remplir respectivement
-	// le titre, le descriptif et le texte de la rubrique.
+	// le titre et le descriptif de la rubrique.
 	include_spip('inc/svp_plugin');
 	include_spip('action/editer_objet');
 	foreach ($rubriques_plugin as $_rubrique) {
@@ -58,14 +58,9 @@ function action_rubrique_plugin_synchroniser_texte_dist($arguments = null) {
 				$set['titre'] = $plugin['nom'];
 			}
 
-			// -- On traite le descriptif et le texte:
-			//    - Si le descriptif existe dans la rubrique et que le texte est vide on recopie le descriptif dans le texte
-			//    - Ensuite, on ne le remplace le descriptif que si l'option de forçage est active ou que celui-ci est vide.
+			// -- On traite le descriptif :
+			//    on ne remplace le descriptif que si l'option de forçage est active ou que celui-ci est vide.
 			if ($_rubrique['descriptif']) {
-				// Recopie du descriptif
-				if (!$_rubrique['texte']) {
-					$set['texte'] = $_rubrique['descriptif'];
-				}
 				// Forçage du descriptif
 				if ($forcer) {
 					if ($plugin['slogan']) {

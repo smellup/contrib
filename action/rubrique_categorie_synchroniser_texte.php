@@ -9,9 +9,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Cette action permet de copier le titre et la description d'une catégorie dans les champs idoines
- * de la rubrique-catégorie associée si elle existe. Seuls les textes non vides sont copiés.
+ * de la rubrique-catégorie associée si elle existe.
  *
- * Cette action est réservée aux webmestres. Elle ne nécessite aucun argument.
+ * Cette action est réservée aux webmestres. Elle accepte un argument optionnel pour forcer la mise à jour.
  *
  * @return void
  */
@@ -88,14 +88,9 @@ function rubrique_categorie_synchroniser($categorie, $rang, $forcer = false) {
 			$set['titre'] = "${numero}. {$categorie['titre']}";
 		}
 
-		// -- On traite le descriptif et le texte:
-		//    - Si le descriptif existe dans la rubrique et que le texte est vide on recopie le descriptif dans le texte
-		//    - Ensuite, on ne le remplace le descriptif que si l'option de forçage est active ou que celui-ci est vide.
+		// -- On traite le descriptif :
+		//    on ne remplace le descriptif que si l'option de forçage est active ou que celui-ci est vide.
 		if ($rubrique['descriptif']) {
-			// Recopie du descriptif
-			if (!$rubrique['texte']) {
-				$set['texte'] = $rubrique['descriptif'];
-			}
 			// Forçage du descriptif
 			if ($forcer) {
 				if ($categorie['descriptif']) {
