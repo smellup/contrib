@@ -10,18 +10,16 @@
 	- l'environnement de la rubrique
 ]
 
-<BOUCLE_article(ARTICLES) {id_article}>
-	[(#REM) Déterminer le type de rubrique ]
-	#SET{type_rubrique, #ID_RUBRIQUE|rubrique_determiner_type}
+[(#REM) Déterminer le type de rubrique ]
+#SET{type_rubrique, #ID_RUBRIQUE|rubrique_determiner_type}
 
-	<BOUCLE_types_article(DATA) {source table, #ENV{data}}>
-	[(#GET{type_rubrique}|in_array{#ENV{exclusions/#CLE}}|non)
-	<div class="choix[ (#ENV{class})]">
-		<input type="radio" name="#ENV{nom}" class="radio" id="champ_#ENV{nom}[_(#CLE)]_#COMPTEUR_BOUCLE" value="#CLE"[ (#ENV{valeur}|=={#CLE}|oui)checked="checked"]>
-		<label for="champ_#ENV{nom}[_(#CLE)]_#COMPTEUR_BOUCLE">
-			[(#VALEUR|ucfirst)]
-		</label>
-	</div>
-	]
-	</BOUCLE_types_article>
-</BOUCLE_article>
+<BOUCLE_types_article(DATA) {source table, #ENV{data}}>
+[(#GET{type_rubrique}|in_array{#ENV{exclusions/#CLE}}|non)
+<div class="choix[ (#ENV{class})]">
+	<input type="radio" name="#ENV{nom}" class="radio" id="champ_#ENV{nom}[_(#CLE)]_#COMPTEUR_BOUCLE" value="#CLE"[ (#ENV{valeur}|=={#CLE}|oui)checked="checked"]>
+	<label for="champ_#ENV{nom}[_(#CLE)]_#COMPTEUR_BOUCLE">
+		[(#VALEUR|ucfirst)]
+	</label>
+</div>
+]
+</BOUCLE_types_article>

@@ -5,36 +5,41 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Retourne la description complète ou une liste de champs précisés dans l'appel
- * d'un objet plugin identifié par son préfixe.
+ * d'un objet rubrique identifié par son id.
  *
  * @param int          $id_rubrique  Id de la rubrique.
  * @param array|string $informations Identifiant d'un champ ou de plusieurs champs de la description d'une rubrique.
  *                                   Si l'argument est vide, la fonction renvoie la description complète.
  *
  * @return mixed La description brute complète ou partielle de la rubrique :
- *               - sous la forme d'une valeur simple si l'information demandée est unique (chaine)
- *               - sous la forme d'un tabelau associatif indexé par le nom du champ sinon.
+ *               - sous la forme d'une valeur simple si l'information demandée est unique (chaine ou tableau à un élément)
+ *               - sous la forme d'un tabelau associatif sinon.
+ *               - sous la forme d'un tableau vide si une erreur s'est produite.
  */
 function rubrique_lire($id_rubrique, $informations = array()) {
 
 	// Initialisation du tableau statique des descriptions
 	static $descriptions_rubrique = array();
 
-	if (($id_rubrique = intval($id_rubrique))
-		and !isset($descriptions_rubrique[$id_rubrique])) {
-		// Initialisation des attributs de la requête.
-		$from = array('spip_rubriques');
-		$where[] = 'id_rubrique=' . $id_rubrique;
+	// Initialisation de la description (sortie en cas d'erreur).
+	$description = array();
 
-		// Acquisition de tous les champs du plugin et sauvegarde de celle-ci à l'index du préfixe.
-		$descriptions_rubrique[$id_rubrique] = array();
-		if ($description = sql_fetsel('*', $from, $where)) {
-			$descriptions_rubrique[$id_rubrique] = $description;
+	if ($id_rubrique = intval($id_rubrique)) {
+		if (!isset($descriptions_rubrique[$id_rubrique])) {
+			// Initialisation des attributs de la requête.
+			$from = array('spip_rubriques');
+			$where[] = 'id_rubrique=' . $id_rubrique;
+
+			// Acquisition de tous les champs du plugin et sauvegarde de celle-ci à l'index du préfixe.
+			$descriptions_rubrique[$id_rubrique] = array();
+			if ($description = sql_fetsel('*', $from, $where)) {
+				$descriptions_rubrique[$id_rubrique] = $description;
+			}
 		}
-	}
 
-	// On extrait la description complète maintenant que l'on sait qu'elle existe.
-	$description = $descriptions_rubrique[$id_rubrique];
+		// On extrait la description complète maintenant que l'on sait qu'elle existe.
+		$description = $descriptions_rubrique[$id_rubrique];
+	}
 
 	// On ne retourne que les champs demandés
 	if ($description and $informations) {
