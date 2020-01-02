@@ -57,6 +57,11 @@
 			|icone_horizontale{<:previsualiser:>,preview})]
 	]
 <//B_publie>
+<BOUCLE_plugin(PLUGINS) {prefixe}>
+	[(#ID_PLUGIN|generer_url_entite{plugin}
+		|icone_horizontale{<:contrib:icone_voir_plugin:>, plugin-24})
+	]
+</BOUCLE_plugin>
 
 </div>
 </BOUCLE_rub>
