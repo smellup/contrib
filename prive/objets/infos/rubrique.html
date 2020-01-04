@@ -10,7 +10,7 @@
 	[(#SET{categorie_secteur, #ID_RUBRIQUE|rubrique_lire_categorie_secteur})]
 	[<div class="numero">
 		(#PROFONDEUR|=={2}|?{<:svp:label_prefixe:>, <:svptype:categorie_identifiant_label:>})&nbsp;:
-		<p class="plugin">[<span class="[couleur_(#GET{categorie_secteur})]">(#PROFONDEUR|=={2}|?{#PREFIXE, #CATEGORIE})</span>]</p>
+		<p class="prefixe">[<span class="[couleur_(#GET{categorie_secteur})]">(#PROFONDEUR|=={2}|?{#PREFIXE, #CATEGORIE})</span>]</p>
 	</div>]
 ]
 

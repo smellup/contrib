@@ -53,3 +53,65 @@ function contrib_affiche_droite($flux) {
 
 	return $flux;
 }
+
+/**
+ * Insertion dans le pipeline boite_infos (SPIP).
+ * - Fiche objet d'un plugin :
+ *   - Rajouter un lien privé vers la rubrique associée si elle existe.
+ *   - Enrichir le préfixe avec la couleur de la catégorie du plugin.
+ *
+ * @pipeline boite_infos
+ *
+ * @param $flux array Le contexte du pipeline
+ *
+ * @return $flux array Le contexte du pipeline modifié
+ */
+function contrib_boite_infos($flux) {
+	if (isset($flux['args']['type'])) {
+		// Initialisation du type d'objet concerné.
+		$objet = $flux['args']['type'];
+
+		if (
+			($objet_exec = trouver_objet_exec($objet))
+			and !$objet_exec['edition']
+			and ($objet == 'plugin')
+			and ($id_plugin = intval($flux['args']['id']))
+		) {
+			// Page d'un plugin.
+
+			// Ajout du bouton "voir la rubrique..."
+			// -- On recherche le préfixe du plugin
+			include_spip('inc/svp_plugin');
+			$prefixe = plugin_lire($id_plugin, 'prefixe');
+
+			// -- Inclure le bouton "voir la rubrique" si elle existe
+			$contexte = array(
+				'id_plugin' => $id_plugin,
+				'prefixe'   => $prefixe,
+			);
+			if ($bouton = recuperer_fond('prive/squelettes/inclure/inc-bouton_voir_rubrique_plugin', $contexte)) {
+				$flux['data'] .= $bouton;
+			}
+
+			// Coloration du préfixe du plugin
+			// -- on recherche la catégorie du plugin
+			include_spip('inc/contrib_plugin');
+			$categorie = plugin_lire_categorie($prefixe, 'racine');
+
+			if ($categorie) {
+				// -- on ajoute au span une class décrivant la couleur de la catégorie
+				$cherche = "/(<p[^>]*class=(?:'|\")prefixe[^>]*>\s*)(<span>)/is";
+				if (preg_match($cherche, $flux['data'], $m)) {
+					$flux['data'] = preg_replace(
+						$cherche,
+						'$1' . "<span class=\"couleur_${categorie}\">",
+						$flux['data'],
+						1
+					);
+				}
+			}
+		}
+	}
+
+	return $flux;
+}

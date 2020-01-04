@@ -23,7 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dashboard_menu'       => 'Dashboard SPIP-Contrib',
 
 	// L
-	'icone_voir_plugin' => 'Voir le plugin',
+	'icone_voir_plugin'          => 'Voir le plugin',
+	'icone_voir_rubrique_plugin' => 'Voir la rubrique de documentation',
 
 	// L
 	'type_article_label'             => 'Type d\'article',
