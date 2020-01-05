@@ -1,0 +1,4 @@
+nom: '<:contrib:type_controle_article_prepa_nom:>'
+description: '<:contrib:type_controle_article_prepa_desc:>'
+icone: 'article-24.png'
+fonction: 'html'
