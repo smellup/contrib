@@ -1,0 +1,28 @@
+{
+  "nom": "<:contrib:dashboard_contrib_nom:>",
+  "description": "<:contrib:dashboard_contrib_desc:>",
+  "icone": "dashboard-24.png",
+  "boite": "<:contrib:boite_contrib_desc:>",
+  "groupes": [
+    {"article":
+      {
+        "identifiant": "article",
+        "nom": "<:contrib:groupe_contrib_article_nom:>",
+        "controles": [
+          "contrib_article_prepa",
+          "contrib_article_prop",
+          "contrib_article_refuse"
+        ]
+      }
+    },
+    {"rubrique":
+      {
+        "identifiant": "rubrique",
+        "nom": "<:contrib:groupe_contrib_article_nom:>",
+        "controles": [
+          "contrib_rubrique_prefixe"
+        ]
+      }
+    }
+  ]
+}
