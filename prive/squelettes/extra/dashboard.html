@@ -1,8 +1,4 @@
-[(#REM) <!-- Boite d'information sur le dashboard et boutons de raccourcis --> ]
-#BOITE_OUVRIR{#CHEMIN_IMAGE{boussole_gerer-24.png}|balise_img{'',cadre-icone}, info}
-	<:contrib:boite_info_explication:>
-#BOITE_FERMER
-
+[(#REM) <!-- Boutons de raccourcis --> ]
 [(#AUTORISER{webmestre}|oui)
 	#BOITE_OUVRIR{'', raccourcis}
 	[(#URL_ACTION_AUTEUR{rubrique_categorie_synchroniser_texte, '', #SELF}

@@ -19,8 +19,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_secteur_galaxie_explication' => 'Choisir parmi les secteurs disponibles (hors secteur-carnet, secteur-apropos et secteurs-plugin) le ou les secteurs qui composeront la partie Galaxie du site.',
 
 	// D
-	'dashboard_page_titre' => 'Dashboard de SPIP-Contrib',
-	'dashboard_menu'       => 'Dashboard SPIP-Contrib',
+	'dashboard_contrib_nom'  => 'Dashboard de SPIP-Contrib',
+	'dashboard_contrib_desc' => 'Le dashboard de SPIP-Contrib permet de contrôler la cohérence de la structure définie au fil du temps. Ce dashboard utilise les objets et les mécanismes du plugin Check Factory.',
+
+	// D
+	'groupe_contrib_article_nom'   => 'Articles',
+	'groupe_contrib_rubrique_nom'  => 'Rubriques',
 
 	// L
 	'icone_voir_plugin'          => 'Voir le plugin',
@@ -39,12 +43,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rubrique_plugin_synchroniser_texte_label'    => 'Synchroniser les rubriques-plugin',
 
 	// T
-	'type_controle_aucun_disponible'        => 'Aucun type de contrôle disponible. Essayez de relancer le chargement.',
-	'type_controle_activer'                 => 'Activer le type de contrôle',
-	'type_controle_desactiver'              => 'Désactiver le type de contrôle',
 	'type_controle_article_prepa_nom'       => 'Articles en cours de rédaction',
 	'type_controle_article_prepa_desc'      => 'Les articles sont classés par année, des plus anciens aux plus récents.',
 	'type_controle_rubrique_prefixe_nom'    => 'Rubriques-plugin avec préfixe erroné',
 	'type_controle_rubrique_prefixe_desc'   => 'Le préfixe est soit absent, soit inconnu de SVP.',
-
 );
