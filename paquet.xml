@@ -28,5 +28,5 @@
 	<pipeline nom="affiche_droite" inclure="contrib_pipelines.php" />
 	<pipeline nom="boite_infos" inclure="contrib_pipelines.php" />
 
-	<menu nom="contrib" titre="contrib:dashboard_menu" parent="menu_administration" icone="images/dashboard-16.png" action="dashboard" />
+	<menu nom="contrib" titre="contrib:dashboard_menu" parent="menu_administration" icone="images/dashboard-16.png" action="dashboard" parametres="identifiant=contrib" />
 </paquet>

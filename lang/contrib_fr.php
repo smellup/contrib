@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_secteur_galaxie_explication' => 'Choisir parmi les secteurs disponibles (hors secteur-carnet, secteur-apropos et secteurs-plugin) le ou les secteurs qui composeront la partie Galaxie du site.',
 
 	// D
+	'dashboard_menu'         => 'Dashboard SPIP-Contrib',
 	'dashboard_contrib_nom'  => 'Dashboard de SPIP-Contrib',
 	'dashboard_contrib_desc' => 'Le dashboard de SPIP-Contrib permet de contrôler la cohérence de la structure définie au fil du temps. Ce dashboard utilise les objets et les mécanismes du plugin Check Factory.',
 
