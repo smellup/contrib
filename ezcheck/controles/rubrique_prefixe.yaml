@@ -1,3 +1,4 @@
+plugin: 'contrib'
 nom: '<:contrib:type_controle_rubrique_prefixe_nom:>'
 description: '<:contrib:type_controle_rubrique_prefixe_desc:>'
 icone: 'rubrique-24.png'
