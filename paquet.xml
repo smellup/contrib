@@ -21,6 +21,7 @@
 	<necessite nom="svp" compatibilite="[2.1.3;]" />
 	<necessite nom="svptype" compatibilite="[0.2.0;]" />
 	<necessite nom="couleur_objet" compatibilite="[0.4.3;]" />
+	<necessite nom="ezcheck" compatibilite="[0.1.0;[" />
 
 	<pipeline nom="declarer_champs_extras" inclure="base/contrib_declarations.php" />
 	<pipeline nom="autoriser" inclure="contrib_autorisations.php" />

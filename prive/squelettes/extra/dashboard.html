@@ -1,5 +1,5 @@
 [(#REM) <!-- Boutons de raccourcis --> ]
-[(#AUTORISER{webmestre}|oui)
+[(#AUTORISER{webmestre}|et{#IDENTIFIANT|=={contrib}}|oui)
 	#BOITE_OUVRIR{'', raccourcis}
 	[(#URL_ACTION_AUTEUR{rubrique_categorie_synchroniser_texte, '', #SELF}
 		|icone_horizontale{<:contrib:rubrique_categorie_synchroniser_texte_label:>, rubrique_categorie-24.png})]
